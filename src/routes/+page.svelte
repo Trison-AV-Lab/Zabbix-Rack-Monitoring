@@ -64,7 +64,7 @@
 <section>
 	<div id="modal">
 		{#if shallShowModal}
-			<HostInfo host={currentHost}/>
+			<HostInfo host={currentHost} />
 		{/if}
 	</div>
 	<div class="head-data">
