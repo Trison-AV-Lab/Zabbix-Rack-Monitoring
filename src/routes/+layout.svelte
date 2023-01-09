@@ -1,53 +1,67 @@
 <script>
 	import Header from './Header.svelte';
 	import './styles.css';
+
 </script>
 
 <div class="app">
-	<Header />
+	<div class="header"><Header /></div>
 
 	<main>
+		<div id="main" class="blur-bg"></div>
 		<slot />
 	</main>
 
 	<footer>
-		<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
+		<p>AV Monitoring Dashboard by <a href="/about"> TRISON </a></p>
 	</footer>
 </div>
 
 <style>
-	.app {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
+	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 	main {
-		flex: 1;
 		display: flex;
-		flex-direction: column;
-		padding: 1rem;
+		justify-content: center;
+		align-items: center;
+	}
+	.blur-bg {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		top: 100px;
+		left: 0;
 		width: 100%;
-		max-width: 64rem;
-		margin: 0 auto;
-		box-sizing: border-box;
+		height: 100%;
+		background-image: url('/src/lib/images/porsche.png');
+		background-repeat: no-repeat;
+		background-position-x: center;
+		background-size: 50%;
+		filter: blur(4px);
+		z-index: -1;
 	}
 
 	footer {
+		position: sticky;
+		bottom: 0;
+		width: 100%;
+		height: 20px;
+		background-color: var(--color-bg-1);
 		display: flex;
-		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		padding: 12px;
+		font-family: 'Montserrat', sans-serif;
+	}
+
+	footer p {
+		font-size: 0.8rem;
+		font-weight: 400;
+		letter-spacing: 3px;
 	}
 
 	footer a {
-		font-weight: bold;
+		color: var(--color-theme-1);
+		font-weight: 700;
 	}
 
-	@media (min-width: 480px) {
-		footer {
-			padding: 12px 0;
-		}
-	}
 </style>

@@ -1,13 +1,12 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
+	import logo from '$lib/images/Zabbix.png';
 </script>
 
 <header>
 	<div class="corner">
-		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
+		<a href="http://localhost/zabbix">
+			<img src={logo} alt="Zabbix" />
 		</a>
 	</div>
 
@@ -17,36 +16,30 @@
 		</svg>
 		<ul>
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Home</a>
+				<a href="/">Dashboard</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
-				<a href="/about">About</a>
-			</li>
-			<li aria-current={$page.url.pathname.startsWith('/sverdle') ? 'page' : undefined}>
-				<a href="/sverdle">Sverdle</a>
+			<li aria-current={$page.url.pathname === '/support' ? 'page' : undefined}>
+				<a href="/support">Support</a>
 			</li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
-
-	<div class="corner">
-		<a href="https://github.com/sveltejs/kit">
-			<img src={github} alt="GitHub" />
-		</a>
-	</div>
+	<div style="width: 100px;"></div>
 </header>
 
 <style>
 	header {
 		display: flex;
 		justify-content: space-between;
+		margin: 0;
+		padding: 0;
 	}
 
 	.corner {
-		width: 3em;
-		height: 3em;
+		width: 10em;
+		height: 4em;
 	}
 
 	.corner a {
@@ -54,19 +47,25 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 100%;
+		height: 200%;
 	}
 
 	.corner img {
-		width: 2em;
-		height: 2em;
+		width: 100%;
+		height: 100%;
 		object-fit: contain;
 	}
 
 	nav {
 		display: flex;
 		justify-content: center;
-		--background: rgba(255, 255, 255, 0.7);
+		--background: var(--color-bg-2);
+	}
+	/*
+	* nav links has theme 2 color
+	*/
+	nav a {
+		color: var(--color-theme-2);
 	}
 
 	svg {
