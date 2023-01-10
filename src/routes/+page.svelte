@@ -130,14 +130,6 @@
 		margin-left: 0.5rem;
 	}
 
-	.status-count .unavailable::after {
-		background-color: var(--offline);
-	}
-
-	.status-count .available::after {
-		background-color: var(--online);
-	}
-
 	.hosts {
 		display: flex;
 		flex-wrap: wrap;

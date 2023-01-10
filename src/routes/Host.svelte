@@ -22,21 +22,23 @@
 		{#if host.items.filter((item) => item.name === 'Zabbix agent ping').length === 0}
 			Network Status: <span class="unknown">Unknown</span>
 		{/if}
-	</div>
-	<div id="device-icon"></div>
-	<div id="host-groups">
-		{#each host.groups as group}
-			<div class="group">
-				{group.name}
-			</div>
-		{/each}
+		<div id="device-icon"></div>
+		<div id="host-groups">
+			{#each host.groups as group}
+				{#if group.name !== 'Discovered hosts'}
+					<div class="group">
+						{group.name}
+					</div>
+				{/if}
+			{/each}
+		</div>
 	</div>
 </section>
 
 <style>
 	#host-card {
 		width: 28vw;
-		height: 8vh;
+		height: 12vh;
 		background: radial-gradient(
 			circle,
 			var(--optional-color-4a) 0%,
@@ -60,5 +62,18 @@
 		font-family: var(--primary-font);
 		color: var(--optional-color-1a);
 	}
-
+	#host-groups {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin-top: 4px;
+	}
+	.group {
+		background: var(--optional-color-1a);
+		border-radius: 5px;
+		padding: 2px 4px;
+		margin: 0 2px;
+		color: var(--optional-color-4a);
+	}
 </style>
