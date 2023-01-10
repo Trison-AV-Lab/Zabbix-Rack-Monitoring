@@ -35,9 +35,11 @@
 	--optional-color-5a: #81b29a;
 	--optional-color-6a: #f2cc8f;
 
+	--shadow-color: rgba(0, 0, 0, 0.25);
 	/* Fonts */
 	--primary-font: 'Montserrat', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
+
 }
 
 body {
@@ -189,6 +191,10 @@ button:focus:not(:focus-visible) {
 
 .offline {
 	color: var(--offline-color);
+}
+
+.unknown {
+	color: var(--unknown-color);
 }
 
 .device-count {
