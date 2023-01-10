@@ -3,6 +3,7 @@
 	import Host from './Host.svelte';
 	import HostInfo from './HostInfo.svelte';
 	const zabbixApiUrl = 'http://20.229.182.95:9080//api_jsonrpc.php';
+	const devonly_ApiTokenKey = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
 
 	let hosts: Array<HostType> = [];
 
@@ -12,6 +13,8 @@
 	};
 	type HostType = {
 		name: string;
+		active_available: string;
+		interfaces: Array<{ ip: string }>;
 		items: Array<ItemType>;
 	};
 	axios
@@ -26,7 +29,7 @@
 			auth: null
 		})
 		.then((response: any) => {
-			let auth = response.data.result;
+			//let auth = response.data.result; //Use this on production environment
 			axios
 				.post(zabbixApiUrl, {
 					jsonrpc: '2.0',
@@ -45,7 +48,7 @@
 						selectTags: 'extend',
 						selectParentTemplates: 'extend'
 					},
-					auth: '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b', /*auth*/
+					auth: devonly_ApiTokenKey /*auth*/,
 					id: 1
 				})
 				.then((response) => {
@@ -54,13 +57,15 @@
 						count: hosts.length,
 						online: hosts.filter(
 							(host) =>
-								host.items.filter((item) => item.name === 'Zabbix agent ping' && item.lastvalue === '1')
-									.length > 0
+								host.items.filter(
+									(item) => item.name === 'Zabbix agent ping' && item.lastvalue === '1'
+								).length > 0
 						).length,
 						offline: hosts.filter(
 							(host) =>
-								host.items.filter((item) => item.name === 'Zabbix agent ping' && item.lastvalue === '0')
-									.length > 0
+								host.items.filter(
+									(item) => item.name === 'Zabbix agent ping' && item.lastvalue === '0'
+								).length > 0
 						).length
 					};
 				})
@@ -68,10 +73,10 @@
 					console.log('error:', error);
 				});
 		});
-	
+
 	let shallShowModal = false;
 	let currentHost: any = null;
-	
+
 	function showModal(host: any) {
 		shallShowModal = true;
 		currentHost = host;
@@ -95,22 +100,10 @@
 		{/if}
 	</div>
 	<div class="head-data">
-		<div class="device-count">Devices: {hosts.length}</div>
+		<div class="device-count">Devices: {devices.count}</div>
 		<div class="status-count">
-			<span class="offline-bg"
-				>{hosts.filter(
-					(host) =>
-						host.items.filter((item) => item.name === 'Zabbix agent ping' && item.lastvalue === '0')
-							.length > 0
-				).length}</span
-			>
-			<span class="online-bg"
-				>{hosts.filter(
-					(host) =>
-						host.items.filter((item) => item.name === 'Zabbix agent ping' && item.lastvalue === '1')
-							.length > 0
-				).length}</span
-			>
+			<span class="offline-bg">{devices.offline}</span>
+			<span class="online-bg">{devices.online}</span>
 		</div>
 	</div>
 	<div class="hosts">
