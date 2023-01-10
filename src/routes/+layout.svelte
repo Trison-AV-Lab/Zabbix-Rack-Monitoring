@@ -19,10 +19,18 @@
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+	.header {
+		position: sticky;
+		top: 0;
+		width: 100%;
+		height: 100px;
+		background-color: var(--color-bg-1);
+	}
 	main {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		background-color: var(--color-bg-1);
 	}
 	.blur-bg {
 		display: flex;
