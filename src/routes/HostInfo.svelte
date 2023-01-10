@@ -2,9 +2,7 @@
     export let host: any;
 </script>
 <section>
-    <div class="refresh-button">
-        <button on:click={() => window.location.reload()}>X</button>
-    </div>
+    <button class="btn-link btn" on:click={() => window.location.reload()}>X</button>
     <h1>{host.name}</h1>
     <div class="host-ping">
         {#each host.items as item}
@@ -73,34 +71,13 @@
         height: 350px;
         margin: 10px;
         padding: 20px;
-        border: 1px solid var(--color-theme-1);
+        border: 1px solid var(--color-theme-2);
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        cursor: pointer;
-        background-color: var(--color-bg-1);
+        background-color: var(--color-bg-2);
     }
-    .refresh-button {
-        display: flex;
-        justify-content: flex-end;
-        width: 100%;
-    }
-    button {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--color-theme-1);
-        background-color: transparent;
-        border: 1px solid var(--color-theme-1);
-        border-radius: 10px;
-        padding: 10px 20px;
-        cursor: pointer;
-        position: relative;
-        transition: all 0.2s ease-in-out;
-    }
-    button:hover {
-        background-color: var(--color-theme-1);
-        color: white;
-    }
+
+
     h1 {
         font-family: 'Montserrat', sans-serif;
         font-size: 18px;
@@ -154,5 +131,12 @@
     }
     .unknown {
         color: var(--unknown);
+    }
+
+    button {
+        position: absolute;
+        top: 20px;
+        right: 370px;
+        border-radius: 10px;
     }
 </style>

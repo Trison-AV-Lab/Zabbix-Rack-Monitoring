@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import logo from '$lib/images/Zabbix.png';
-	import customer from '$lib/images/customer.svg';
+	import customer from '$lib/images/Inditex.svg';
 </script>
 
 <header>
@@ -135,5 +135,6 @@
 	a:hover {
 		color: var(--color-theme-1);
 	}
+
 
 </style>

@@ -1,4 +1,4 @@
-@import '@fontsource/fira-mono';
+@import url('@fontsource/fira-mono');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 :root {
@@ -133,11 +133,12 @@ button:focus:not(:focus-visible) {
 	font-weight: 700;
 	color: var(--optional-color-1);
 	background-color: var(--optional-color-1a);
-	border: none;
+	border: 1px solid var(--optional-color-1);
 	border-radius: 5px;
 	padding: 0.5rem 1rem;
 	cursor: pointer;
-	transition: all 0.3s ease-in-out;
+	box-shadow: 0 0 4px var(--shadow-color);
+	transition: all 0.6s ease-in-out;
 }
 
 .btn:hover {
@@ -147,6 +148,7 @@ button:focus:not(:focus-visible) {
 
 .btn-link {
 	color: var(--optional-color-5);
+	border: 1px solid var(--optional-color-5);
 }
 
 .btn-link:hover {
@@ -155,6 +157,7 @@ button:focus:not(:focus-visible) {
 
 .btn-info {
 	color: var(--optional-color-5a);
+	border: 1px solid var(--optional-color-5a);
 }
 
 .btn-info:hover {
@@ -223,6 +226,8 @@ button:focus:not(:focus-visible) {
 	margin: 0;
 	padding: 0;
 	text-align: center;
+	border-top-right-radius: 16px;
+	border-bottom-right-radius: 16px;
 }
 
 .offline-bg {
@@ -235,4 +240,6 @@ button:focus:not(:focus-visible) {
 	margin: 0;
 	padding: 0;
 	text-align: center;
+	border-top-left-radius: 16px;
+	border-bottom-left-radius: 16px;
 }
