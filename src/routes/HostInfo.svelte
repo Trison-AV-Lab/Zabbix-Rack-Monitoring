@@ -155,6 +155,4 @@
     .unknown {
         color: var(--unknown);
     }
-
-
 </style>

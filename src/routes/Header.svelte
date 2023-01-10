@@ -1,9 +1,11 @@
 <script>
 	import { page } from '$app/stores';
 	import logo from '$lib/images/Zabbix.png';
+	import customer from '$lib/images/customer.svg';
 </script>
 
 <header>
+	<div class="space"></div>
 	<div class="corner">
 		<a href="http://localhost/zabbix">
 			<img src={logo} alt="Zabbix" />
@@ -26,7 +28,12 @@
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
-	<div style="width: 100px;"></div>
+	<div class="corner">
+		<a href="http://localhost/zabbix">
+			<img src={customer} alt="logo" />
+		</a>
+	</div>
+	<div class="space"></div>
 </header>
 
 <style>
@@ -35,6 +42,9 @@
 		justify-content: space-between;
 		margin: 0;
 		padding: 0;
+		margin-bottom: 1.3em;
+		padding-bottom: 1.8em;
+		box-shadow: 0 0 0 1px var(--color-bg-2);
 	}
 
 	.corner {
@@ -125,4 +135,5 @@
 	a:hover {
 		color: var(--color-theme-1);
 	}
+
 </style>

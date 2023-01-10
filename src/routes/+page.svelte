@@ -116,18 +116,13 @@
 	.status-count {
 		display: flex;
 	}
-
 	.status-count span {
-		margin-right: 1rem;
-	}
-
-	.status-count span::after {
-		content: ' ';
-		display: inline-block;
-		width: 1rem;
-		height: 1rem;
-		border-radius: 30%;
-		margin-left: 0.5rem;
+		display: flex;
+		align-items: center;
+		font-size: 1.2rem;
+		font-weight: 600;
+		text-align: center;
+		padding: 0.5rem 0.5rem;
 	}
 
 	.hosts {

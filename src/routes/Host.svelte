@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { serialize } from 'cookie';
 	import type { HostType } from '../types';
 	export let host: HostType;
 </script>
@@ -8,21 +9,34 @@
 		{host.name}
 	</div>
 	<div id="status-section">
-		{#each host.items as item}
-			{#if item.name === 'Zabbix agent ping'}
-				{#if item.lastvalue === '0'}
-					Network Status: <span class="offline">Offline</span>
-				{:else if item.lastvalue === '1'}
-					Network Status: <span class="online">Online</span>
-				{:else}
-					Network Status: <span class="unknown">{item.lastvalue}</span>
+		<div class="agent">
+			{#each host.items as item}
+				{#if item.name === 'Zabbix agent ping'}
+					Monitoring:
+					{#if item.lastvalue === '0'}
+						<span class="offline">Unavailable</span>
+					{:else if item.lastvalue === '1'}
+						<span class="online">Available</span>
+					{:else}
+						<span class="unknown">{item.lastvalue}</span>
+					{/if}
 				{/if}
+			{/each}
+			{#if host.items.filter((item) => item.name === 'Zabbix agent ping').length === 0}
+				Monitoring: <span class="unknown">Unknown</span>
 			{/if}
-		{/each}
-		{#if host.items.filter((item) => item.name === 'Zabbix agent ping').length === 0}
-			Network Status: <span class="unknown">Unknown</span>
-		{/if}
-		<div id="device-icon"></div>
+		</div>
+		<div class="ping">
+			Status:
+			{#if host.active_available === '0' || host.items.filter((item) => item.name === 'ICMP ping').lastvalue === '0'}
+				<span class="offline">Offline</span>
+			{:else if host.active_available === '1' || host.items.filter((item) => item.name === 'ICMP ping').lastvalue === '1'}
+				<span class="online">Online</span>
+			{/if}
+		</div>
+	</div>
+	<div class="foots">
+		<div id="device-icon" />
 		<div id="host-groups">
 			{#each host.groups as group}
 				{#if group.name !== 'Discovered hosts'}
@@ -39,41 +53,66 @@
 	#host-card {
 		width: 28vw;
 		height: 12vh;
-		background: radial-gradient(
-			circle,
-			var(--optional-color-4a) 0%,
-			var(--optional-color-4) 100%
-		);
+		background: var(--color-bg-2);
 		border-radius: 10px;
 		box-shadow: 0px 0px 6px var(--shadow-color);
-		padding: 8px;
-		margin: 8px;
+		padding: 0.6vh 0.3vw;
+		margin: 0.6vh 0.6vw;
 	}
 	#host-name {
-		font-size: 0.8rem;
 		font-weight: 600;
 		font-family: var(--primary-font);
-		color: var(--optional-color-1a);
+		color: var(--primary-color);
 		text-align: center;
+		border-bottom: 1px solid var(--color-bg-0);
+		text-overflow: ellipsis;
+		overflow: hidden;
+		white-space: nowrap;
+		font-size: small;
 	}
 	#status-section {
 		font-size: 0.8rem;
 		font-weight: 600;
 		font-family: var(--primary-font);
-		color: var(--optional-color-1a);
+		color: var(--secondary-color);
+		margin-top: 0.5vh;
+		/*space between*/
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.online,
+	.offline,
+	.unknown {
+		font-weight: 600;
+		font-family: var(--primary-font);
+		text-shadow: 1px 0 var(--color-bg-2), -1px 0 var(--color-bg-2), 0 1px var(--color-bg-2),
+			0 -1px var(--color-bg-2), 1px 1px var(--color-bg-2), -1px -1px 0 var(--color-bg-2),
+			1px -1px 0 var(--color-bg-2), -1px 1px 0 var(--color-bg-2);
 	}
 	#host-groups {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		margin-top: 4px;
+		margin-top: 1.5vh;
 	}
 	.group {
-		background: var(--optional-color-1a);
+		background: var(--secondary-color);
 		border-radius: 5px;
-		padding: 2px 4px;
-		margin: 0 2px;
-		color: var(--optional-color-4a);
+		padding: 0.2vh 0.5vw;
+		margin: 0 0.2vw;
+		color: var(--color-bg-2);
+		font-family: var(--primary-font);
+		font-weight: 300;
+		font-size: 0.7rem;
+	}
+
+	.agent {
+		margin-left: 1vw;
+	}
+	.ping {
+		margin-right: 1vw;
 	}
 </style>
