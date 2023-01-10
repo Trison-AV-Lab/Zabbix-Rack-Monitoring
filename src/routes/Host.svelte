@@ -27,16 +27,29 @@
 			{/if}
 		</div>
 		<div class="ping">
-			Status:
-			{#if host.active_available === '0' || host.items.filter((item) => item.name === 'ICMP ping').lastvalue === '0'}
-				<span class="offline">Offline</span>
-			{:else if host.active_available === '1' || host.items.filter((item) => item.name === 'ICMP ping').lastvalue === '1'}
+			Ping:
+			{#if host.active_available === '1'}
+				{#if host.items.filter((item) => item.name === 'ICMP ping').length === 0}
+					<span class="offline">Offline</span>
+				{:else}
+					{#each host.items as item}
+						{#if item.name === 'ICMP ping'}
+							{#if item.lastvalue === '0'}
+								<span class="offline">ICMP offline</span>
+							{:else if item.lastvalue === '1'}
+								<span class="online">ICMP online</span>
+							{:else}
+								<span class="unknown">{item.lastvalue}</span>
+							{/if}
+						{/if}
+					{/each}
+				{/if}
+			{:else}
 				<span class="online">Online</span>
 			{/if}
 		</div>
 	</div>
 	<div class="foots">
-		<div id="device-icon" />
 		<div id="host-groups">
 			{#each host.groups as group}
 				{#if group.name !== 'Discovered hosts'}
