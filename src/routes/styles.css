@@ -1,33 +1,53 @@
 @import '@fontsource/fira-mono';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 :root {
 	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-mono: 'Fira Mono', monospace;
 	--color-bg-0: rgb(202, 216, 228);
 	--color-bg-1: hsl(209, 36%, 86%);
 	--color-bg-2: hsl(224, 44%, 95%);
-	--color-theme-1: #ff3e00;
-	--color-theme-2: #4075a6;
 	--color-text: rgba(0, 0, 0, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
 	font-family: var(--font-body);
 	color: var(--color-text);
+	/* TRISON Colors */
+	--primary-color: #000000;
+	--secondary-color: #5e5e5e;
+	--other-color: #bababa;
+
+	--online-color: #a7c957;
+	--offline-color: #e63946;
+	--unknown-color: #f77f00;
+
+	--optional-color-1: #ef476f;
+	--optional-color-2: #f78c6b;
+	--optional-color-3: #ffd166;
+	--optional-color-4: #06d6a0;
+	--optional-color-5: #118ab2;
+	--optional-color-6: #073b4c;
+
+	--optional-color-1a: #f4f1de;
+	--optional-color-2a: #eab69f;
+	--optional-color-3a: #e07a5f;
+	--optional-color-4a: #3d405b;
+	--optional-color-5a: #81b29a;
+	--optional-color-6a: #f2cc8f;
+
+	--shadow-color: rgba(0, 0, 0, 0.25);
+	/* Fonts */
+	--primary-font: 'Montserrat', sans-serif;
+	--font-mono: 'Fira Mono', monospace;
+
 }
 
 body {
 	min-height: 100vh;
 	margin: 0;
 	background-attachment: fixed;
-	background-color: var(--color-bg-1);
+	background-color: #dadada;
 	background-size: 100vw 100vh;
-	background-image: radial-gradient(
-			50% 50% at 50% 50%,
-			rgba(255, 255, 255, 0.75) 0%,
-			rgba(255, 255, 255, 0) 100%
-		),
-		linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);
 }
 
 h1,
@@ -104,4 +124,107 @@ button:focus:not(:focus-visible) {
 	position: absolute;
 	width: 1px;
 	white-space: nowrap;
+}
+
+/* Custom Component styles */
+.btn {
+	font-family: var(--primary-font);
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: var(--optional-color-1);
+	background-color: var(--optional-color-1a);
+	border: none;
+	border-radius: 5px;
+	padding: 0.5rem 1rem;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+	background-color: var(--optional-color-1);
+	color: var(--optional-color-1a);
+}
+
+.btn-link {
+	color: var(--optional-color-5);
+}
+
+.btn-link:hover {
+	background-color: var(--optional-color-5);
+}
+
+.btn-info {
+	color: var(--optional-color-5a);
+}
+
+.btn-info:hover {
+	background-color: var(--optional-color-5a);
+}
+
+.card {
+	margin: 10px;
+	padding: 10px;
+	background: linear-gradient(100deg, var(--optional-color-4) 0%, var(--optional-color-4a) 100%);
+	color: var(--primary-color);
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	transition: all 0.3s ease-in-out;
+	width: 300px;
+}
+
+.card h2 {
+	font-size: 0.8rem;
+	font-weight: 600;
+	font-family: var(--primary-font);
+}
+
+.card p {
+	font-size: 0.8rem;
+	font-weight: 600;
+	font-family: var(--primary-font);
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.online {
+	color: var(--online-color);
+}
+
+.offline {
+	color: var(--offline-color);
+}
+
+.unknown {
+	color: var(--unknown-color);
+}
+
+.device-count {
+	font-family: var(--primary-font);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.status-count {
+	font-family: var(--primary-font);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.online-bg {
+	background-color: var(--online-color);
+	color: var(--optional-color-1a);
+	font-weight: 700;
+	border: 1px solid var(--primary-color);
+	width: 16px;
+}
+
+.offline-bg {
+	background-color: var(--offline-color);
+	color: var(--optional-color-1a);
+	font-weight: 700;
+	border: 1px solid var(--primary-color);
+	width: 16px;
 }

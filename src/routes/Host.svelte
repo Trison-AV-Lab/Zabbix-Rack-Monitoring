@@ -1,22 +1,34 @@
 <script lang="ts">
-	export let host: any;
+	import type { HostType } from '../types';
+	export let host: HostType;
 </script>
 
-<section>
-	<div class="host">
-		<div class="host-name">
-			{host.name}
-		</div>
-		<div class="status">
-			{#each host.items as item}
-				{#if item.name === 'Zabbix agent ping'}
-					{#if item.lastvalue === '0'}
-						Status: <span class="offline">Offline</span>
-					{:else if item.lastvalue === '1'}
-						Status: <span class="online">Online</span>
-					{:else}
-						Status: <span class="unknown">{item.lastvalue}</span>
-					{/if}
+<section id="host-card">
+	<div id="host-name">
+		{host.name}
+	</div>
+	<div id="status-section">
+		{#each host.items as item}
+			{#if item.name === 'Zabbix agent ping'}
+				{#if item.lastvalue === '0'}
+					Network Status: <span class="offline">Offline</span>
+				{:else if item.lastvalue === '1'}
+					Network Status: <span class="online">Online</span>
+				{:else}
+					Network Status: <span class="unknown">{item.lastvalue}</span>
+				{/if}
+			{/if}
+		{/each}
+		{#if host.items.filter((item) => item.name === 'Zabbix agent ping').length === 0}
+			Network Status: <span class="unknown">Unknown</span>
+		{/if}
+		<div id="device-icon"></div>
+		<div id="host-groups">
+			{#each host.groups as group}
+				{#if group.name !== 'Discovered hosts'}
+					<div class="group">
+						{group.name}
+					</div>
 				{/if}
 			{/each}
 		</div>
@@ -24,43 +36,44 @@
 </section>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-	.host {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: left;
-		width: 280px;
-		height: 20px;
-		margin: 10px;
-		padding: 20px;
-		border: 1px solid var(--color-theme-1);
+	#host-card {
+		width: 28vw;
+		height: 12vh;
+		background: radial-gradient(
+			circle,
+			var(--optional-color-4a) 0%,
+			var(--optional-color-4) 100%
+		);
 		border-radius: 10px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		cursor: pointer;
-		background-color: var(--color-bg-1);
+		box-shadow: 0px 0px 6px var(--shadow-color);
+		padding: 8px;
+		margin: 8px;
 	}
-
-	.host-name {
-		font-size: 12px;
-		font-weight: 700;
+	#host-name {
+		font-size: 0.8rem;
+		font-weight: 600;
+		font-family: var(--primary-font);
+		color: var(--optional-color-1a);
+		text-align: center;
 	}
-
-	.status {
-		font-size: 14px;
+	#status-section {
+		font-size: 0.8rem;
+		font-weight: 600;
+		font-family: var(--primary-font);
+		color: var(--optional-color-1a);
 	}
-
-	.offline {
-		color: red;
+	#host-groups {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		margin-top: 4px;
 	}
-
-	.online {
-		color: green;
+	.group {
+		background: var(--optional-color-1a);
+		border-radius: 5px;
+		padding: 2px 4px;
+		margin: 0 2px;
+		color: var(--optional-color-4a);
 	}
-
-	.unknown {
-		color: gray;
-	}
-
 </style>

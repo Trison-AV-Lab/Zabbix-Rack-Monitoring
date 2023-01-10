@@ -2,9 +2,12 @@
 	import axios from 'axios';
 	import Host from './Host.svelte';
 	import HostInfo from './HostInfo.svelte';
-	const zabbixApiUrl = 'http://20.229.182.95:9080//api_jsonrpc.php';
+	import type { HostType } from '../types';
 
-	let hosts: Array<any> = [];
+	const zabbixApiUrl = 'http://20.229.182.95:9080//api_jsonrpc.php';
+	const devonly_ApiTokenKey = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
+
+	let hosts: Array<HostType> = [];
 
 	axios
 		.post(zabbixApiUrl, {
@@ -18,7 +21,7 @@
 			auth: null
 		})
 		.then((response: any) => {
-			let auth = response.data.result;
+			//let auth = response.data.result; //Use this on production environment
 			axios
 				.post(zabbixApiUrl, {
 					jsonrpc: '2.0',
@@ -27,33 +30,47 @@
 						output: ['active_available', 'name'],
 						selectInterfaces: ['ip'],
 						selectItems: ['name', 'lastvalue'],
-						selectTriggers: 'extend',
-						selectGraphs: 'extend',
-						selectApplications: 'extend',
-						selectInventory: 'extend',
-						selectHttpTests: 'extend',
-						selectDiscoveries: 'extend',
-						selectScreens: 'extend',
-						selectTags: 'extend',
-						selectParentTemplates: 'extend'
+						selectGroups: ['name'],
 					},
-					auth: '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b',
+					auth: devonly_ApiTokenKey /*auth*/,
 					id: 1
 				})
 				.then((response) => {
 					hosts = response.data.result;
-					console.log('hosts:', hosts);
+					devices = {
+						count: hosts.length,
+						online: hosts.filter(
+							(host) =>
+								host.items.filter(
+									(item) => item.name === 'Zabbix agent ping' && item.lastvalue === '1'
+								).length > 0
+						).length,
+						offline: hosts.filter(
+							(host) =>
+								host.items.filter(
+									(item) => item.name === 'Zabbix agent ping' && item.lastvalue === '0'
+								).length > 0
+						).length
+					};
+					console.log('Hosts:', hosts);
 				})
 				.catch((error) => {
 					console.log('error:', error);
 				});
 		});
-		let shallShowModal = false;
-		let currentHost: any = null;
-		function showModal(host:any) {
-			shallShowModal = true;
-			currentHost = host;
-		}
+
+	let shallShowModal = false;
+	let currentHost: HostType | null = null;
+
+	function showModal(host: HostType) {
+		shallShowModal = true;
+		currentHost = host;
+	}
+	let devices = {
+		count: 0,
+		online: 0,
+		offline: 0
+	};
 </script>
 
 <svelte:head>
@@ -68,12 +85,16 @@
 		{/if}
 	</div>
 	<div class="head-data">
-		<div class="device-count">Devices: {hosts.length}</div> <div class="status-count"><span class="unavailable">{hosts.filter((host) => host.items.filter((item) => item.name === 'Zabbix agent ping' && item.lastvalue === '0').length > 0).length}</span> <span class="available">{hosts.filter((host) => host.items.filter((item) => item.name === 'Zabbix agent ping' && item.lastvalue === '1').length > 0).length}</span></div>
+		<div class="device-count">Devices: {devices.count}</div>
+		<div class="status-count">
+			<span class="offline-bg">{devices.offline}</span>
+			<span class="online-bg">{devices.online}</span>
+		</div>
 	</div>
 	<div class="hosts">
 		{#each hosts as host}
 			<div class="host" on:click={() => showModal(host)} on:keydown={() => showModal(host)}>
-				<Host host={host} />
+				<Host {host} />
 			</div>
 		{/each}
 	</div>
@@ -109,14 +130,6 @@
 		margin-left: 0.5rem;
 	}
 
-	.status-count .unavailable::after {
-		background-color: var(--offline);
-	}
-
-	.status-count .available::after {
-		background-color: var(--online);
-	}
-
 	.hosts {
 		display: flex;
 		flex-wrap: wrap;
@@ -134,6 +147,5 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-
 	}
 </style>
