@@ -24,43 +24,5 @@
 </section>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
-	.host {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: left;
-		width: 280px;
-		height: 20px;
-		margin: 10px;
-		padding: 20px;
-		border: 1px solid var(--color-theme-1);
-		border-radius: 10px;
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		cursor: pointer;
-		background-color: var(--color-bg-1);
-	}
-
-	.host-name {
-		font-size: 12px;
-		font-weight: 700;
-	}
-
-	.status {
-		font-size: 14px;
-	}
-
-	.offline {
-		color: red;
-	}
-
-	.online {
-		color: green;
-	}
-
-	.unknown {
-		color: gray;
-	}
 
 </style>
