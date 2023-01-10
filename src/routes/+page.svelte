@@ -2,21 +2,13 @@
 	import axios from 'axios';
 	import Host from './Host.svelte';
 	import HostInfo from './HostInfo.svelte';
+	import type { HostType } from '../types';
+
 	const zabbixApiUrl = 'http://20.229.182.95:9080//api_jsonrpc.php';
 	const devonly_ApiTokenKey = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
 
 	let hosts: Array<HostType> = [];
 
-	type ItemType = {
-		name: string;
-		lastvalue: string;
-	};
-	type HostType = {
-		name: string;
-		active_available: string;
-		interfaces: Array<{ ip: string }>;
-		items: Array<ItemType>;
-	};
 	axios
 		.post(zabbixApiUrl, {
 			jsonrpc: '2.0',
@@ -38,15 +30,7 @@
 						output: ['active_available', 'name'],
 						selectInterfaces: ['ip'],
 						selectItems: ['name', 'lastvalue'],
-						selectTriggers: 'extend',
-						selectGraphs: 'extend',
-						selectApplications: 'extend',
-						selectInventory: 'extend',
-						selectHttpTests: 'extend',
-						selectDiscoveries: 'extend',
-						selectScreens: 'extend',
-						selectTags: 'extend',
-						selectParentTemplates: 'extend'
+						selectGroups: ['name'],
 					},
 					auth: devonly_ApiTokenKey /*auth*/,
 					id: 1
@@ -68,6 +52,7 @@
 								).length > 0
 						).length
 					};
+					console.log('Hosts:', hosts);
 				})
 				.catch((error) => {
 					console.log('error:', error);
@@ -75,9 +60,9 @@
 		});
 
 	let shallShowModal = false;
-	let currentHost: any = null;
+	let currentHost: HostType | null = null;
 
-	function showModal(host: any) {
+	function showModal(host: HostType) {
 		shallShowModal = true;
 		currentHost = host;
 	}
