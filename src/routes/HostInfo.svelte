@@ -1,11 +1,12 @@
 <script lang="ts">
-    export let host: any;
+    import type { ZabbixHost } from '../types';
+    export let zabbixHost: ZabbixHost;
 </script>
 <section>
     <button class="btn-link btn" on:click={() => window.location.reload()}>X</button>
-    <h1>{host.name}</h1>
+    <h1>{zabbixHost.name}</h1>
     <div class="host-ping">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name === 'Zabbix agent ping'}
                 {#if item.lastvalue === '0'}
                     Status: <span class="offline">Offline</span>
@@ -18,42 +19,42 @@
         {/each}
     </div>
     <div class="host-uptime">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name === 'Uptime'}
                 Uptime: {item.lastvalue}s
             {/if}
         {/each}
     </div>
     <div class="host-memory">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name === 'Memory utilization'}
                 Memory usage: {item.lastvalue.slice(0,4)}%
             {/if}
         {/each}
     </div>
     <div class="host-cpu">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name === 'CPU utilization'}
                 CPU usage: {item.lastvalue.slice(0,4)}%
             {/if}
         {/each}
     </div>
     <div class="host-disk">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name.includes('Space utilization')}
                 Disk space usage: {item.lastvalue.slice(0,4)}%
             {/if}
         {/each}
     </div>
     <div class="OS">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name === 'Operating system'}
                 {item.lastvalue.split(' ')[0]}
             {/if}
         {/each}
     </div>
     <div class="Screen resolution">
-        {#each host.items as item}
+        {#each zabbixHost.items as item}
             {#if item.name === 'Screen resolution'}
                 {item.lastvalue}
             {/if}

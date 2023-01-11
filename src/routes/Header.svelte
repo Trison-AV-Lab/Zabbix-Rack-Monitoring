@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import logo from '$lib/images/Zabbix.png';
-	import customer from '$lib/images/Inditex.svg';
+	import customer from '$lib/images/RR.svg';
 </script>
 
 <header>
