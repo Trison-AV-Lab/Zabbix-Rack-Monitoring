@@ -1,6 +1,5 @@
 @import url('@fontsource/fira-mono');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-
 :root {
 	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -16,32 +15,26 @@
 	--primary-color: #000000;
 	--secondary-color: #5e5e5e;
 	--other-color: #bababa;
-
 	--online-color: #a7c957;
 	--offline-color: #e63946;
 	--unknown-color: #f77f00;
-
 	--optional-color-1: #ef476f;
 	--optional-color-2: #f78c6b;
 	--optional-color-3: #ffd166;
 	--optional-color-4: #06d6a0;
 	--optional-color-5: #118ab2;
 	--optional-color-6: #073b4c;
-
 	--optional-color-1a: #f4f1de;
 	--optional-color-2a: #eab69f;
 	--optional-color-3a: #e07a5f;
 	--optional-color-4a: #3d405b;
 	--optional-color-5a: #81b29a;
 	--optional-color-6a: #f2cc8f;
-
 	--shadow-color: rgba(0, 0, 0, 0.25);
 	/* Fonts */
 	--primary-font: 'Montserrat', sans-serif;
 	--font-mono: 'Fira Mono', monospace;
-
 }
-
 body {
 	min-height: 100vh;
 	margin: 0;
@@ -49,35 +42,28 @@ body {
 	background-color: #dadada;
 	background-size: 100vw 100vh;
 }
-
 h1,
 h2,
 p {
 	font-weight: 400;
 }
-
 p {
 	line-height: 1.5;
 }
-
 a {
 	color: var(--color-theme-1);
 	text-decoration: none;
 }
-
 a:hover {
 	text-decoration: underline;
 }
-
 h1 {
 	font-size: 2rem;
 	text-align: center;
 }
-
 h2 {
 	font-size: 1rem;
 }
-
 pre {
 	font-size: 16px;
 	font-family: var(--font-mono);
@@ -88,7 +74,6 @@ pre {
 	overflow-x: auto;
 	color: var(--color-text);
 }
-
 .text-column {
 	display: flex;
 	max-width: 48rem;
@@ -97,23 +82,19 @@ pre {
 	justify-content: center;
 	margin: 0 auto;
 }
-
 input,
 button {
 	font-size: inherit;
 	font-family: inherit;
 }
-
 button:focus:not(:focus-visible) {
 	outline: none;
 }
-
 @media (min-width: 720px) {
 	h1 {
 		font-size: 2.4rem;
 	}
 }
-
 .visually-hidden {
 	border: 0;
 	clip: rect(0 0 0 0);
@@ -125,7 +106,6 @@ button:focus:not(:focus-visible) {
 	width: 1px;
 	white-space: nowrap;
 }
-
 /* Custom Component styles */
 .btn {
 	font-family: var(--primary-font);
@@ -140,30 +120,24 @@ button:focus:not(:focus-visible) {
 	box-shadow: 0 0 4px var(--shadow-color);
 	transition: all 0.6s ease-in-out;
 }
-
 .btn:hover {
 	background-color: var(--optional-color-1);
 	color: var(--optional-color-1a);
 }
-
 .btn-link {
 	color: var(--optional-color-5);
 	border: 1px solid var(--optional-color-5);
 }
-
 .btn-link:hover {
 	background-color: var(--optional-color-5);
 }
-
 .btn-info {
 	color: var(--optional-color-5a);
 	border: 1px solid var(--optional-color-5a);
 }
-
 .btn-info:hover {
 	background-color: var(--optional-color-5a);
 }
-
 .card {
 	margin: 10px;
 	padding: 10px;
@@ -174,32 +148,26 @@ button:focus:not(:focus-visible) {
 	transition: all 0.3s ease-in-out;
 	width: 300px;
 }
-
 .card h2 {
 	font-size: 0.8rem;
 	font-weight: 600;
 	font-family: var(--primary-font);
 }
-
 .card p {
 	font-size: 0.8rem;
 	font-weight: 600;
 	font-family: var(--primary-font);
 	text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-
 .online {
 	color: var(--online-color);
 }
-
 .offline {
 	color: var(--offline-color);
 }
-
 .unknown {
 	color: var(--unknown-color);
 }
-
 .device-count {
 	font-family: var(--primary-font);
 	display: flex;
@@ -229,7 +197,6 @@ button:focus:not(:focus-visible) {
 	border-top-right-radius: 16px;
 	border-bottom-right-radius: 16px;
 }
-
 .offline-bg {
 	background-color: var(--offline-color);
 	color: var(--optional-color-1a);

@@ -5,13 +5,12 @@
 </script>
 
 <header>
-	<div class="space"></div>
+	<div class="space" />
 	<div class="corner">
 		<a href="http://localhost/zabbix">
 			<img src={logo} alt="Zabbix" />
 		</a>
 	</div>
-
 	<nav>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
@@ -33,7 +32,7 @@
 			<img src={customer} alt="logo" />
 		</a>
 	</div>
-	<div class="space"></div>
+	<div class="space" />
 </header>
 
 <style>
@@ -46,12 +45,10 @@
 		padding-bottom: 1.8em;
 		box-shadow: 0 0 0 1px var(--color-bg-2);
 	}
-
 	.corner {
 		width: 10em;
 		height: 4em;
 	}
-
 	.corner a {
 		display: flex;
 		align-items: center;
@@ -59,35 +56,27 @@
 		width: 100%;
 		height: 200%;
 	}
-
 	.corner img {
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
 	}
-
 	nav {
 		display: flex;
 		justify-content: center;
 		--background: var(--color-bg-2);
 	}
-	/*
-	* nav links has theme 2 color
-	*/
 	nav a {
 		color: var(--color-theme-2);
 	}
-
 	svg {
 		width: 2em;
 		height: 3em;
 		display: block;
 	}
-
 	path {
 		fill: var(--background);
 	}
-
 	ul {
 		position: relative;
 		padding: 0;
@@ -100,12 +89,10 @@
 		background: var(--background);
 		background-size: contain;
 	}
-
 	li {
 		position: relative;
 		height: 100%;
 	}
-
 	li[aria-current='page']::before {
 		--size: 6px;
 		content: '';
@@ -117,7 +104,6 @@
 		border: var(--size) solid transparent;
 		border-top: var(--size) solid var(--color-theme-1);
 	}
-
 	nav a {
 		display: flex;
 		height: 100%;
@@ -131,10 +117,7 @@
 		text-decoration: none;
 		transition: color 0.2s linear;
 	}
-
 	a:hover {
 		color: var(--color-theme-1);
 	}
-
-
 </style>

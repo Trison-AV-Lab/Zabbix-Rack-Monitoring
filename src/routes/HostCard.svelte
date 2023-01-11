@@ -119,7 +119,6 @@
 		font-weight: 300;
 		font-size: 0.7rem;
 	}
-
 	.agent {
 		margin-left: 1vw;
 	}

@@ -6,7 +6,7 @@
 <div class="app">
 	<div class="header"><Header /></div>
 	<main>
-		<div id="main" class="blur-bg"></div>
+		<div id="main" class="blur-bg" />
 		<slot />
 	</main>
 	<footer>
