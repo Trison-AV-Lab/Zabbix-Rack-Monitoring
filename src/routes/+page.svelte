@@ -1,58 +1,36 @@
 <script lang="ts">
-	import axios from 'axios';
+	/* Modules */
 	import Host from './Host.svelte';
 	import HostInfo from './HostInfo.svelte';
+	/* Types */
 	import type { HostType } from '../types';
+	/* Functions */
+	import postFunctions from '../post';
 
-	const zabbixApiUrl = 'http://20.229.182.95:9080//api_jsonrpc.php';
 	const devonly_ApiTokenKey = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
 
 	let hosts: Array<HostType> = [];
-
-	axios
-		.post(zabbixApiUrl, {
-			jsonrpc: '2.0',
-			method: 'user.login',
-			params: {
-				user: 'Admin',
-				password: 'zabbix'
-			},
-			id: 1,
-			auth: null
-		})
-		.then((response: any) => {
+	
+	postFunctions.login().then((response: any) => {
 			//let auth = response.data.result; //Use this on production environment
-			axios
-				.post(zabbixApiUrl, {
-					jsonrpc: '2.0',
-					method: 'host.get',
-					params: {
-						output: ['active_available', 'name'],
-						selectInterfaces: ['ip'],
-						selectItems: ['name', 'lastvalue'],
-						selectGroups: ['name'],
-					},
-					auth: devonly_ApiTokenKey /*auth*/,
-					id: 1
-				})
-				.then((response) => {
+			postFunctions.getHosts(devonly_ApiTokenKey).then((response) => {
 					hosts = response.data.result;
+					console.log(hosts);
 					devices = {
 						count: hosts.length,
 						online: hosts.filter(
 							(host) =>
 								host.items.filter(
-									(item) => item.name === 'Zabbix agent ping' && item.lastvalue === '1'
+									(item) => (item.name === 'Zabbix agent ping' && item.lastvalue === '1') || (item.name === 'ICMP ping' && item.lastvalue === '1')
 								).length > 0
 						).length,
 						offline: hosts.filter(
 							(host) =>
 								host.items.filter(
-									(item) => item.name === 'Zabbix agent ping' && item.lastvalue === '0'
+									(item) => (item.name === 'Zabbix agent ping' && item.lastvalue === '0') || (item.name === 'ICMP ping' && item.lastvalue === '0')
 								).length > 0
 						).length
 					};
-					console.log('Hosts:', hosts);
 				})
 				.catch((error) => {
 					console.log('error:', error);
