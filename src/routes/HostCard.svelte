@@ -1,16 +1,15 @@
 <script lang="ts">
-	import { serialize } from 'cookie';
-	import type { HostType } from '../types';
-	export let host: HostType;
+	import type { ZabbixHost } from '../types';
+	export let zabbixHost: ZabbixHost;
 </script>
 
 <section id="host-card">
 	<div id="host-name">
-		{host.name}
+		{zabbixHost.name}
 	</div>
 	<div id="status-section">
 		<div class="agent">
-			{#each host.items as item}
+			{#each zabbixHost.items as item}
 				{#if item.name === 'Zabbix agent ping'}
 					Monitoring:
 					{#if item.lastvalue === '0'}
@@ -22,17 +21,17 @@
 					{/if}
 				{/if}
 			{/each}
-			{#if host.items.filter((item) => item.name === 'Zabbix agent ping').length === 0}
+			{#if zabbixHost.items.filter((item) => item.name === 'Zabbix agent ping').length === 0}
 				Monitoring: <span class="unknown">Unknown</span>
 			{/if}
 		</div>
 		<div class="ping">
 			Ping:
-			{#if host.active_available === '1'}
-				{#if host.items.filter((item) => item.name === 'ICMP ping').length === 0}
+			{#if zabbixHost.active_available === '1'}
+				{#if zabbixHost.items.filter((item) => item.name === 'ICMP ping').length === 0}
 					<span class="offline">Offline</span>
 				{:else}
-					{#each host.items as item}
+					{#each zabbixHost.items as item}
 						{#if item.name === 'ICMP ping'}
 							{#if item.lastvalue === '0'}
 								<span class="offline">ICMP offline</span>
@@ -51,7 +50,7 @@
 	</div>
 	<div class="foots">
 		<div id="host-groups">
-			{#each host.groups as group}
+			{#each zabbixHost.groups as group}
 				{#if group.name !== 'Discovered hosts'}
 					<div class="group">
 						{group.name}
@@ -89,7 +88,6 @@
 		font-family: var(--primary-font);
 		color: var(--secondary-color);
 		margin-top: 0.5vh;
-		/*space between*/
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
@@ -121,7 +119,6 @@
 		font-weight: 300;
 		font-size: 0.7rem;
 	}
-
 	.agent {
 		margin-left: 1vw;
 	}
