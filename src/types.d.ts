@@ -1,20 +1,26 @@
-export type HostType = {
+export interface ZabbixHost {
     name: string;
     active_available: string;
-    interfaces: Array<IPType>;
-    items: Array<ItemType>;
-    groups: Array<GroupType>;
+    interfaces: Array<HostIP>;
+    items: Array<HostItem>;
+    groups: Array<HostGroup>;
 };
 
-export type ItemType = {
+export type HostItem = {
     name: string;
     lastvalue: string;
 };
 
-export type GroupType = {
+export type HostGroup = {
     name: string;
 };
 
-export type IPType = {
+export type HostIP = {
     ip: string;
+}
+
+export interface DeviceCounters {
+    total: number;
+    available: number;
+    unavailable: number;
 }
