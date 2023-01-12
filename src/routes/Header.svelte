@@ -39,22 +39,10 @@
 	header {
 		display: flex;
 		justify-content: space-between;
-		margin: 0;
-		padding: 0;
-		margin-bottom: 1.3em;
-		padding-bottom: 1.8em;
-		box-shadow: 0 0 0 1px var(--color-bg-2);
+		padding-bottom: 5vh;
 	}
 	.corner {
-		width: 10em;
-		height: 4em;
-	}
-	.corner a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		height: 200%;
+		height: 20vh;
 	}
 	.corner img {
 		width: 100%;
@@ -66,13 +54,10 @@
 		justify-content: center;
 		--background: var(--color-bg-2);
 	}
-	nav a {
-		color: var(--color-theme-2);
-	}
 	svg {
-		width: 2em;
-		height: 3em;
-		display: block;
+		width: 2.7vw;
+		height: 7vh;
+		display: inline;
 	}
 	path {
 		fill: var(--background);
@@ -81,7 +66,7 @@
 		position: relative;
 		padding: 0;
 		margin: 0;
-		height: 3em;
+		height: 7vh;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -102,22 +87,22 @@
 		top: 0;
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
-		border-top: var(--size) solid var(--color-theme-1);
+		border-top: var(--size) solid var(--optional-color-5);
 	}
 	nav a {
 		display: flex;
 		height: 100%;
 		align-items: center;
-		padding: 0 0.5rem;
-		color: var(--color-text);
+		padding: 0 2vw;
+		color: var(--optional-color-4a);
 		font-weight: 700;
-		font-size: 0.8rem;
+		font-size: 0.7rem;
 		text-transform: uppercase;
-		letter-spacing: 0.1em;
+		letter-spacing: 0.2em;
 		text-decoration: none;
 		transition: color 0.2s linear;
 	}
 	a:hover {
-		color: var(--color-theme-1);
+		color: var(--optional-color-4);
 	}
 </style>
