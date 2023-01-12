@@ -1,6 +1,6 @@
 {
 	"name": "zabbix-rack-monitoring",
-	"version": "0.0.3-PRE",
+	"version": "0.0.7-PRE",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",

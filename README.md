@@ -1,5 +1,5 @@
 # Zabbix Rack Monitoring (Custom frontend)
-![](https://img.shields.io/badge/Zabbix%20Rack%20Monitoring-0.0.3--PRE-yellowgreen?logo=textpattern)
+![](https://img.shields.io/badge/Zabbix%20Rack%20Monitoring-0.0.7--PRE-orange?logo=textpattern)
 ![](https://img.shields.io/badge/Svelte-3.54-yellowgreen?logo=svelte)
 ![](https://img.shields.io/badge/Vite-4.0-yellowgreen?logo=vite)
 ![](https://img.shields.io/badge/Axios-1.2.2-yellowgreen?logo=axios)
@@ -44,3 +44,12 @@ Construir webapp para producción
 ```bash
 > npm install
 ```
+
+## Sobre Zabbix-Rack-Monitoring
+Además de la instalación del frontend, será necesario:
+
+- Instalar Ubuntu Server 20 en el equipo.
+- Instalar XPanel
+- Configurar demonio contra http://localhost/zabbix modo kiosk
+- Instalar Zabbix Server, mysql, y demonio de Zabbix
+> Guía de instalación de <ins>Zabbix</ins> [Aquí](https://www.zabbix.com/download?zabbix=6.2&os_distribution=ubuntu&os_version=20.04&components=server_frontend_agent&db=mysql&ws=apache)
