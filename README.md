@@ -15,10 +15,10 @@ Los siguientes comandos se deben ejecutar en una terminal situada en la raíz de
 
 Para subir cambios al proyecto:
 
-```
-git add *
-git commit -m "Feature/Cosas realizadas..."
-git push
+```bash
+> git add *
+> git commit -m "Feature/Cosas realizadas..."
+> git push
 ```
 
 Ejecución en modo desarrollo
@@ -57,6 +57,6 @@ Además de la instalación del frontend, será necesario:
 
 - Instalar Ubuntu Server 20 en el equipo.
 - Instalar XPanel
-- Configurar demonio contra http://localhost/zabbix modo kiosk
+- Configurar demonio contra <http://localhost/zabbix> modo kiosk
 - Instalar Zabbix Server, mysql, y demonio de Zabbix
   > Guía de instalación de <ins>Zabbix</ins> [Aquí](https://www.zabbix.com/download?zabbix=6.2&os_distribution=ubuntu&os_version=20.04&components=server_frontend_agent&db=mysql&ws=apache)
