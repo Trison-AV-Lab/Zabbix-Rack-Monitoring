@@ -1,4 +1,4 @@
-<script>
+<script lang="ts" caches="false" context="module">
 	import Header from './Header.svelte';
 	import './styles.css';
 </script>
@@ -15,7 +15,6 @@
 </div>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 	.header {
 		position: sticky;
 		top: 0;
