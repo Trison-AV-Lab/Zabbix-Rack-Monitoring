@@ -34,6 +34,6 @@ export type PostMethods = {
 	login: () => PostResponse;
 	getHosts: (token: string) => PostResponse;
 	getHostGroups: (token: string) => PostResponse;
-}
+};
 
-export type PostResponse = Promise<AxiosResponse<unknown,unknown>>;
+export type PostResponse = Promise<AxiosResponse<unknown, unknown>>;
