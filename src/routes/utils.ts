@@ -7,7 +7,6 @@ function get_deviceCounters(hosts: Array<ZabbixHost>): DeviceCounters {
 		unavailable: hosts.filter((host) => check_pingStatus(host, '0').length > 0).length
 	};
 }
-
 function get_filteredHostsByGroup(hosts: Array<ZabbixHost>, groupName: string): Array<ZabbixHost> {
 	const filteredHosts: Array<ZabbixHost> = [];
 	hosts.forEach((host) => {
@@ -19,8 +18,10 @@ function get_filteredHostsByGroup(hosts: Array<ZabbixHost>, groupName: string): 
 	});
 	return filteredHosts;
 }
-
-export { get_deviceCounters, get_filteredHostsByGroup };
+function catch_error(error: Error) {
+	console.log(error);
+}
+export { get_deviceCounters, get_filteredHostsByGroup, catch_error };
 
 //#region Auxiliary functions
 function check_pingStatus(host: ZabbixHost, condition: string): Array<HostItem> {
