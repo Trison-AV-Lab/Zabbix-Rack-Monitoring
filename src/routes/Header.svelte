@@ -59,8 +59,8 @@
 		--background: var(--color-bg-2);
 	}
 	svg {
-		width: 2.7vw;
-		height: 7vh;
+		width: 1.3em;
+		height: 2em;
 		display: inline;
 	}
 	path {
@@ -70,7 +70,7 @@
 		position: relative;
 		padding: 0;
 		margin: 0;
-		height: 7vh;
+		height: 2em;
 		display: flex;
 		justify-content: center;
 		align-items: center;

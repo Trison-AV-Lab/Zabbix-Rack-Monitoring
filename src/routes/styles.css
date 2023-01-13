@@ -188,9 +188,6 @@ button:focus:not(:focus-visible) {
 	background-color: var(--online-color);
 	color: var(--optional-color-1a);
 	font-weight: 700;
-	border-top: 1px solid var(--primary-color);
-	border-right: 1px solid var(--primary-color);
-	border-bottom: 1px solid var(--primary-color);
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -201,9 +198,6 @@ button:focus:not(:focus-visible) {
 	background-color: var(--offline-color);
 	color: var(--optional-color-1a);
 	font-weight: 700;
-	border-top: 1px solid var(--primary-color);
-	border-left: 1px solid var(--primary-color);
-	border-bottom: 1px solid var(--primary-color);
 	margin: 0;
 	padding: 0;
 	text-align: center;

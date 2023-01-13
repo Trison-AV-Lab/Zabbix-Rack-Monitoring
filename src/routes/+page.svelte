@@ -104,7 +104,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		padding: 2rem;
+		padding: 1rem;
 	}
 	#select-filter-hostgroup {
 		display: flex;
@@ -133,8 +133,9 @@
 		text-align-last: center;
 	}
 	#device-count {
-		font-size: 1.5rem;
+		font-size: 1rem;
 		font-weight: 600;
+		font-family: var(--primary-font);
 	}
 	#status-count {
 		display: flex;
@@ -142,10 +143,11 @@
 	#status-count span {
 		display: flex;
 		align-items: center;
-		font-size: 1.2rem;
+		font-size: 1rem;
 		font-weight: 600;
 		text-align: center;
 		padding: 0.5rem 0.5rem;
+		font-family: var(--primary-font);
 	}
 	#hosts {
 		display: flex;
