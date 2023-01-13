@@ -1,38 +1,37 @@
 <script lang="ts">
 	import HostCard from './HostCard.svelte';
 	import HostInfo from './HostInfo.svelte';
-	import ZabbixAPI from '../post';
+	import ApiPost from '../post';
 
 	import { getDevicesCount } from './utils';
-
-	import type { ZabbixHost, DeviceCounters } from '../types';
+	import type { ZabbixHost, ApiLoadedData } from '../types';
 
 	const PRE_APIKEY: string = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
-
-	let loadedHosts: Array<ZabbixHost> = [];
+	let loadedData: ApiLoadedData = {
+		hosts: [],
+		groups: [],
+		counters: {
+			total: 0,
+			available: 0,
+			unavailable: 0
+		}
+	};
 	let shallShowModal: boolean = false;
-	let currentHost: ZabbixHost = {
-		name: '',
-		active_available: '',
-		interfaces: [],
-		items: [],
-		groups: []
-	};
-	let devices: DeviceCounters = {
-		total: 0,
-		available: 0,
-		unavailable: 0
-	};
-	ZabbixAPI.login().then((_response) => {
+	let currentHost: ZabbixHost;
+	ApiPost.login().then((_response) => {
 		//let auth = response.data.result; //Use this on production environment
-		ZabbixAPI.getHosts(PRE_APIKEY)
+		ApiPost.getHosts(PRE_APIKEY)
 			.then((response) => {
-				loadedHosts = response.data.result;
-				devices = getDevicesCount(loadedHosts);
+				loadedData.hosts = response.data.result;
+				loadedData.counters = getDevicesCount(response.data.result);
 			})
 			.catch((error) => {
 				console.log('error:', error);
 			});
+		ApiPost.getHostGroups(PRE_APIKEY)
+			.then((response) => {
+				loadedData.groups = response.data.result;
+			})
 	});
 
 	function showModal(host: ZabbixHost) {
@@ -52,14 +51,23 @@
 		{/if}
 	</div>
 	<div class="head-data">
-		<div class="device-count">Devices: {devices.total}</div>
+		<div class="device-count">Devices: {loadedData.counters.total}</div>
+		<div id="select-filter-hostgroup">
+			Filter by group:
+			<select id="group-selector" on:selectionchange={()=>{}}>
+				<option value="all">All</option>
+				{#each loadedData.groups as group}
+					<option value={group.name}>{group.name}</option>
+				{/each}
+			</select>
+		</div>
 		<div class="status-count">
-			<span class="offline-bg">{devices.unavailable}</span>
-			<span class="online-bg">{devices.available}</span>
+			<span class="offline-bg">{loadedData.counters.unavailable}</span>
+			<span class="online-bg">{loadedData.counters.available}</span>
 		</div>
 	</div>
 	<div class="hosts">
-		{#each loadedHosts as host}
+		{#each loadedData.hosts as host}
 			<div class="host" on:click={() => showModal(host)} on:keydown={() => showModal(host)}>
 				<HostCard zabbixHost={host} />
 			</div>
