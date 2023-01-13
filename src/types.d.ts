@@ -24,3 +24,8 @@ export interface DeviceCounters {
 	available: number;
 	unavailable: number;
 }
+export interface ApiLoadedData {
+	hosts: Array<ZabbixHost>;
+	groups: Array<HostGroup>;
+	counters: DeviceCounters;
+}
