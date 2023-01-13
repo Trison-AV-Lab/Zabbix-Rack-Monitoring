@@ -38,7 +38,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-image: url('/src/lib/images/porsche.png');
 		background-repeat: no-repeat;
 		background-position-x: center;
 		background-size: 50%;
