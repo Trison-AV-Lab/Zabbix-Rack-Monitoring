@@ -10,7 +10,6 @@
 	//#region Type imports
 	import type { ZabbixHost, ApiLoadedData } from '../types';
 	//#endregion
-	const PRE_APIKEY: string = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
 	//#region Variables
 	let currentHost: ZabbixHost;
 	let shallShowModal: boolean = false;
@@ -23,14 +22,15 @@
 			unavailable: 0
 		}
 	};
+	let authToken: string = '';
 	//#endregion
-	ZabbixApiPost.login().then((_response) => {
-		//let auth = _response.data.result; //Use this on production environment
-		ZabbixApiPost.getHosts(PRE_APIKEY).then((response) => {
+	ZabbixApiPost.login().then((response) => {
+		authToken = response.data.result; //Use this on production environment
+		ZabbixApiPost.getHosts(authToken).then((response) => {
 				loadedData.hosts = response.data.result;
 				loadedData.counters = get_deviceCounters(response.data.result);
 			}).catch(catch_error);
-		ZabbixApiPost.getHostGroups(PRE_APIKEY)
+		ZabbixApiPost.getHostGroups(authToken)
 			.then((response) => {
 				loadedData.groups = response.data.result;
 			}).catch(catch_error);
@@ -45,7 +45,7 @@
 		let select: HTMLSelectElement = document.getElementById('group-selector') as HTMLSelectElement;
 		let selected: string = select!.options[select.selectedIndex].value;
 		if(selected == 'all'){
-			ZabbixApiPost.getHosts(PRE_APIKEY)
+			ZabbixApiPost.getHosts(authToken)
 			.then((response) => {
 				loadedData.hosts = response.data.result;
 				loadedData.counters = get_deviceCounters(loadedData.hosts);
@@ -54,7 +54,7 @@
 				console.log('error:', error);
 			});
 		}else{
-			ZabbixApiPost.getHosts(PRE_APIKEY)
+			ZabbixApiPost.getHosts(authToken)
 			.then((response) => {
 				loadedData.hosts = get_filteredHostsByGroup(response.data.result, selected);
 				loadedData.counters = get_deviceCounters(loadedData.hosts);
