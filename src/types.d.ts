@@ -24,3 +24,16 @@ export interface DeviceCounters {
 	available: number;
 	unavailable: number;
 }
+export interface ApiLoadedData {
+	hosts: Array<ZabbixHost>;
+	groups: Array<HostGroup>;
+	counters: DeviceCounters;
+}
+
+export type PostMethods = {
+	login: () => PostResponse;
+	getHosts: (token: string) => PostResponse;
+	getHostGroups: (token: string) => PostResponse;
+}
+
+export type PostResponse = Promise<AxiosResponse<unknown,unknown>>;

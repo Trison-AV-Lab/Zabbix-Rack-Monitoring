@@ -1,68 +1,36 @@
-<script>
+<script lang="ts" caches="false" context="module">
 	import Header from './Header.svelte';
+	import Footer from './Footer.svelte';
 	import './styles.css';
 </script>
 
-<div class="app">
-	<div class="header"><Header /></div>
+<div>
+	<div id="header"><Header /></div>
 	<main>
-		<div id="main" class="blur-bg" />
 		<slot />
 	</main>
-	<footer>
-		<p>AV Monitoring Dashboard by <a href="/support"> TRISON </a></p>
-	</footer>
+	<div id="footer"><Footer /></div>
 </div>
 
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-	.header {
-		position: sticky;
-		top: 0;
-		width: 100%;
-		height: 100px;
+<style lang="css" scoped>
+	* {
 		background-color: var(--color-bg-1);
+	}
+	#header,
+	#footer {
+		position:-webkit-sticky;
+		position: sticky;
+	}
+	#header {
+		top: 0;
+		height: 100px;
 	}
 	main {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		background-color: var(--color-bg-1);
 	}
-	.blur-bg {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		position: absolute;
-		top: 100px;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-image: url('/src/lib/images/porsche.png');
-		background-repeat: no-repeat;
-		background-position-x: center;
-		background-size: 50%;
-		filter: blur(4px);
-		z-index: -1;
-	}
-	footer {
-		position: sticky;
+	#footer {
 		bottom: 0;
-		width: 100%;
-		height: 20px;
-		background-color: var(--color-bg-1);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-family: 'Montserrat', sans-serif;
-	}
-	footer p {
-		font-size: 0.8rem;
-		font-weight: 400;
-		letter-spacing: 3px;
-	}
-	footer a {
-		color: var(--color-theme-1);
-		font-weight: 700;
 	}
 </style>

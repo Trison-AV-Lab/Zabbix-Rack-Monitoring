@@ -1,21 +1,21 @@
-<script>
+<script lang="ts" context="module">
 	import { page } from '$app/stores';
 	import logo from '$lib/images/Zabbix.png';
 	import customer from '$lib/images/RR.svg';
 </script>
 
-<header>
+<header id="header">
 	<div class="space" />
 	<div class="corner">
 		<a href="http://localhost/zabbix">
-			<img src={logo} alt="Zabbix" />
+			<img src={logo} alt="Zabbix-Logo" />
 		</a>
 	</div>
-	<nav>
+	<nav id="nav-links">
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
 		</svg>
-		<ul>
+		<ul id="nav-list">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Dashboard</a>
 			</li>
@@ -35,11 +35,15 @@
 	<div class="space" />
 </header>
 
-<style>
-	header {
+<style lang="css" scoped>
+	#header {
 		display: flex;
 		justify-content: space-between;
 		padding-bottom: 5vh;
+	}
+	.space {
+		width: 1em;
+		height: 1em;
 	}
 	.corner {
 		height: 20vh;
@@ -49,7 +53,7 @@
 		height: 100%;
 		object-fit: contain;
 	}
-	nav {
+	#nav-links {
 		display: flex;
 		justify-content: center;
 		--background: var(--color-bg-2);
@@ -62,7 +66,7 @@
 	path {
 		fill: var(--background);
 	}
-	ul {
+	#nav-list {
 		position: relative;
 		padding: 0;
 		margin: 0;
@@ -74,11 +78,11 @@
 		background: var(--background);
 		background-size: contain;
 	}
-	li {
+	#nav-list li {
 		position: relative;
 		height: 100%;
 	}
-	li[aria-current='page']::before {
+	#nav-list li[aria-current='page']::before {
 		--size: 6px;
 		content: '';
 		width: 0;
@@ -87,14 +91,15 @@
 		top: 0;
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
+
 		border-top: var(--size) solid var(--optional-color-5);
 	}
-	nav a {
+	#nav-links a {
 		display: flex;
 		height: 100%;
 		align-items: center;
 		padding: 0 2vw;
-		color: var(--optional-color-4a);
+		color: var(--optional-color-5a);
 		font-weight: 700;
 		font-size: 0.7rem;
 		text-transform: uppercase;
@@ -102,7 +107,5 @@
 		text-decoration: none;
 		transition: color 0.2s linear;
 	}
-	a:hover {
-		color: var(--optional-color-4);
-	}
+
 </style>
