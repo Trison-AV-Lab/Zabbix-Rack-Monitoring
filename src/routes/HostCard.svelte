@@ -1,4 +1,4 @@
-<script lang="ts">
+<script lang="ts" caches="false">
 	import type { ZabbixHost } from '../types';
 	export let zabbixHost: ZabbixHost;
 </script>
@@ -61,7 +61,7 @@
 	</div>
 </section>
 
-<style>
+<style lang="css" scoped>
 	#host-card {
 		width: 28vw;
 		height: 12vh;

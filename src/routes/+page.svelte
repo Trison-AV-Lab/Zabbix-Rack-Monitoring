@@ -1,13 +1,19 @@
-<script lang="ts">
+<script lang="ts" caches="false">
+	//#region Module imports
 	import HostCard from './HostCard.svelte';
 	import HostInfo from './HostInfo.svelte';
-	import ApiPost from '../post';
-
+	//#endregion
+	//#region Function imports
+	import ZabbixApiPost from '../post';
+	import { get_deviceCounters, get_filteredHostsByGroup, catch_error } from './utils';
+	//#endregion
+	//#region Type imports
 	import type { ZabbixHost, ApiLoadedData } from '../types';
-	import { get_deviceCounters, get_filteredHostsByGroup } from './utils';
-
+	//#endregion
 	const PRE_APIKEY: string = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
-
+	//#region Variables
+	let currentHost: ZabbixHost;
+	let shallShowModal: boolean = false;
 	let loadedData: ApiLoadedData = {
 		hosts: [],
 		groups: [],
@@ -17,24 +23,19 @@
 			unavailable: 0
 		}
 	};
-	let shallShowModal: boolean = false;
-	let currentHost: ZabbixHost;
-	ApiPost.login().then((_response) => {
-		//let auth = response.data.result; //Use this on production environment
-		ApiPost.getHosts(PRE_APIKEY)
-			.then((response) => {
+	//#endregion
+	ZabbixApiPost.login().then((_response) => {
+		//let auth = _response.data.result; //Use this on production environment
+		ZabbixApiPost.getHosts(PRE_APIKEY).then((response) => {
 				loadedData.hosts = response.data.result;
 				loadedData.counters = get_deviceCounters(response.data.result);
-			})
-			.catch((error) => {
-				console.log('error:', error);
-			});
-		ApiPost.getHostGroups(PRE_APIKEY)
+			}).catch(catch_error);
+		ZabbixApiPost.getHostGroups(PRE_APIKEY)
 			.then((response) => {
 				loadedData.groups = response.data.result;
-			})
-	});
-
+			}).catch(catch_error);
+	}).catch(catch_error);
+	//#region Event handlers
 	function on__hostCardClicked(host: ZabbixHost): void {
 		shallShowModal = true;
 		currentHost = host;
@@ -44,7 +45,7 @@
 		let select: HTMLSelectElement = document.getElementById('group-selector') as HTMLSelectElement;
 		let selected: string = select!.options[select.selectedIndex].value;
 		if(selected == 'all'){
-			ApiPost.getHosts(PRE_APIKEY)
+			ZabbixApiPost.getHosts(PRE_APIKEY)
 			.then((response) => {
 				loadedData.hosts = response.data.result;
 				loadedData.counters = get_deviceCounters(loadedData.hosts);
@@ -53,7 +54,7 @@
 				console.log('error:', error);
 			});
 		}else{
-			ApiPost.getHosts(PRE_APIKEY)
+			ZabbixApiPost.getHosts(PRE_APIKEY)
 			.then((response) => {
 				loadedData.hosts = get_filteredHostsByGroup(response.data.result, selected);
 				loadedData.counters = get_deviceCounters(loadedData.hosts);
@@ -63,12 +64,12 @@
 			});
 		}
 	}
-
+	//#endregion
 </script>
 <svelte:head>
 	<meta name="description" content="Trison Zabbix" />
 </svelte:head>
-<section id="page">
+<section>
 	<div id="modal">
 		{#if shallShowModal}
 			<HostInfo zabbixHost={currentHost} />
@@ -99,10 +100,6 @@
 	</div>
 </section>
 <style lang="css" scoped>
-	#page {
-		display: flex;
-		flex-direction: column;
-	}
 	#head-data {
 		display: flex;
 		justify-content: space-between;
@@ -112,9 +109,28 @@
 	#select-filter-hostgroup {
 		display: flex;
 		align-items: center;
+		font-family: var(--primary-font);
+		letter-spacing: 0.1rem;
 	}
-	#select-filter-hostgroup select {
-		margin-left: 1rem;
+	#group-selector {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		appearance: none;
+		background: transparent;
+		border: none;
+		border-bottom: 1px solid var(--optional-color-5a);
+		color: var(--optional-color-5a);
+		font-family: var(--primary-font);
+		font-size: 1rem;
+		font-weight: 600;
+		letter-spacing: 0.1rem;
+		margin-left: 0.5rem;
+		background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path fill='%23fff' d='M7 10l5 5 5-5z'/><path fill='none' d='M0 0h24v24H0z'/></svg>");
+		background-repeat: no-repeat;
+		background-position: right 0.5rem top 50%;
+		background-size: 1.5rem;
+		text-align: center;
+		text-align-last: center;
 	}
 	#device-count {
 		font-size: 1.5rem;
