@@ -1,6 +1,6 @@
 # Zabbix Rack Monitoring (Custom frontend)
 
-![Zabbix Rack Monitoring Version](https://img.shields.io/badge/Zabbix%20Rack%20Monitoring-1.0.0%20PROD-orange?logo=textpattern)
+![Zabbix Rack Monitoring Version](https://img.shields.io/badge/Zabbix%20Rack%20Monitoring-1.0.0%20PRE-orange?logo=textpattern)
 ![Svelte Version](https://img.shields.io/badge/Svelte-3.54-yellowgreen?logo=svelte)
 ![Vite Version](https://img.shields.io/badge/Vite-4.0-yellowgreen?logo=vite)
 ![Axios Version](https://img.shields.io/badge/Axios-1.2.2-yellowgreen?logo=axios)
