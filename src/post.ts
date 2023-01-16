@@ -21,8 +21,7 @@ function login(): PostResponse {
 			password: 'zabbix'
 		},
 		id: 1,
-		auth: null,
-		headers: AllowOriginHeader
+		auth: null
 	});
 	return response;
 }

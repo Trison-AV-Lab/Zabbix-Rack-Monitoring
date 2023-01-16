@@ -28,6 +28,7 @@
 		.then((response) => {
 			console.log(response);
 			authToken = response.data.result; //Use this on production environment
+			console.log('authToken:', authToken);
 			ZabbixApiPost.getHosts(authToken)
 				.then((response) => {
 					console.log('hosts loaded!', response.data.result);
