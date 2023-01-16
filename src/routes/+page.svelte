@@ -131,6 +131,7 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 1rem;
+		margin-top: 2rem;
 	}
 	#select-filter-hostgroup {
 		display: flex;
