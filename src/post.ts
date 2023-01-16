@@ -1,12 +1,12 @@
 import axios from 'axios';
 import type { PostMethods, PostResponse } from './types';
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const API_url = 'http://20.229.182.95:9080//api_jsonrpc.php';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const PRO_API_url = 'http://localhost/api_jsonrpc.php';
+const PRO_API_url = 'http://localhost/zabbix/api_jsonrpc.php';
 
 function login(): PostResponse {
-	return axios.post(API_url, {
+	return axios.post(PRO_API_url, {
 		jsonrpc: '2.0',
 		method: 'user.login',
 		params: {
@@ -19,7 +19,7 @@ function login(): PostResponse {
 }
 
 function getHosts(token: string): PostResponse {
-	return axios.post(API_url, {
+	return axios.post(PRO_API_url, {
 		jsonrpc: '2.0',
 		method: 'host.get',
 		params: {
@@ -34,7 +34,7 @@ function getHosts(token: string): PostResponse {
 }
 
 function getHostGroups(token: string): PostResponse {
-	return axios.post(API_url, {
+	return axios.post(PRO_API_url, {
 		jsonrpc: '2.0',
 		method: 'hostgroup.get',
 		params: {
