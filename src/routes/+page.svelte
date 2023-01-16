@@ -27,14 +27,18 @@
 	ZabbixApiPost.login()
 		.then((response) => {
 			authToken = response.data.result; //Use this on production environment
+			console.log('authToken:', authToken);
+			console.log('Getting hosts and groups...');
 			ZabbixApiPost.getHosts(authToken)
 				.then((response) => {
+					console.log('hosts loaded!');
 					loadedData.hosts = response.data.result;
 					loadedData.counters = get_deviceCounters(response.data.result);
 				})
 				.catch(catch_error);
 			ZabbixApiPost.getHostGroups(authToken)
 				.then((response) => {
+					console.log('groups loaded!');
 					loadedData.groups = response.data.result;
 				})
 				.catch(catch_error);
