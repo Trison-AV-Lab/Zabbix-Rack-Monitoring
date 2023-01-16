@@ -11,6 +11,15 @@
 	import type { ZabbixHost, ApiLoadedData } from '../types';
 	//#endregion
 	//#region Variables
+	const uninterestedGroups = [
+		'Applications',
+		'Databases',
+		'Discovered hosts',
+		'Hypervisors',
+		'Linux servers',
+		'Virtual machines',
+		'Zabbix servers'
+	]
 	let currentHost: ZabbixHost;
 	let shallShowModal = false;
 	let loadedData: ApiLoadedData = {
@@ -92,7 +101,9 @@
 			<select id="group-selector" on:change={on__selectOptionChanged}>
 				<option value="all">All</option>
 				{#each loadedData.groups as group}
-					<option value={group.name}>{group.name}</option>
+					{#if !uninterestedGroups.includes(group.name)}
+						<option value={group.name}>{group.name}</option>
+					{/if}
 				{/each}
 			</select>
 		</div>
@@ -146,6 +157,7 @@
 		background-size: 1.5rem;
 		text-align: center;
 		text-align-last: center;
+		min-width: 10rem;
 	}
 	#device-count {
 		font-size: 1rem;
