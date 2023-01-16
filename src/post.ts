@@ -49,8 +49,7 @@ const post: PostMethods = {
 	login: login,
 	getHosts: getHosts,
 	getHostGroups: getHostGroups
-}
-
+};
 
 export { login, getHosts, getHostGroups };
 export default post;

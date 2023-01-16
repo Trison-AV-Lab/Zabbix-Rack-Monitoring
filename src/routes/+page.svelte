@@ -10,10 +10,9 @@
 	//#region Type imports
 	import type { ZabbixHost, ApiLoadedData } from '../types';
 	//#endregion
-	const PRE_APIKEY: string = '712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b';
 	//#region Variables
 	let currentHost: ZabbixHost;
-	let shallShowModal: boolean = false;
+	let shallShowModal = false;
 	let loadedData: ApiLoadedData = {
 		hosts: [],
 		groups: [],
@@ -23,18 +22,24 @@
 			unavailable: 0
 		}
 	};
+	let authToken = '';
 	//#endregion
-	ZabbixApiPost.login().then((_response) => {
-		//let auth = _response.data.result; //Use this on production environment
-		ZabbixApiPost.getHosts(PRE_APIKEY).then((response) => {
-				loadedData.hosts = response.data.result;
-				loadedData.counters = get_deviceCounters(response.data.result);
-			}).catch(catch_error);
-		ZabbixApiPost.getHostGroups(PRE_APIKEY)
-			.then((response) => {
-				loadedData.groups = response.data.result;
-			}).catch(catch_error);
-	}).catch(catch_error);
+	ZabbixApiPost.login()
+		.then((response) => {
+			authToken = response.data.result; //Use this on production environment
+			ZabbixApiPost.getHosts(authToken)
+				.then((response) => {
+					loadedData.hosts = response.data.result;
+					loadedData.counters = get_deviceCounters(response.data.result);
+				})
+				.catch(catch_error);
+			ZabbixApiPost.getHostGroups(authToken)
+				.then((response) => {
+					loadedData.groups = response.data.result;
+				})
+				.catch(catch_error);
+		})
+		.catch(catch_error);
 	//#region Event handlers
 	function on__hostCardClicked(host: ZabbixHost): void {
 		shallShowModal = true;
@@ -44,28 +49,29 @@
 	function on__selectOptionChanged(): void {
 		let select: HTMLSelectElement = document.getElementById('group-selector') as HTMLSelectElement;
 		let selected: string = select!.options[select.selectedIndex].value;
-		if(selected == 'all'){
-			ZabbixApiPost.getHosts(PRE_APIKEY)
-			.then((response) => {
-				loadedData.hosts = response.data.result;
-				loadedData.counters = get_deviceCounters(loadedData.hosts);
-			})
-			.catch((error) => {
-				console.log('error:', error);
-			});
-		}else{
-			ZabbixApiPost.getHosts(PRE_APIKEY)
-			.then((response) => {
-				loadedData.hosts = get_filteredHostsByGroup(response.data.result, selected);
-				loadedData.counters = get_deviceCounters(loadedData.hosts);
-			})
-			.catch((error) => {
-				console.log('error:', error);
-			});
+		if (selected == 'all') {
+			ZabbixApiPost.getHosts(authToken)
+				.then((response) => {
+					loadedData.hosts = response.data.result;
+					loadedData.counters = get_deviceCounters(loadedData.hosts);
+				})
+				.catch((error) => {
+					console.log('error:', error);
+				});
+		} else {
+			ZabbixApiPost.getHosts(authToken)
+				.then((response) => {
+					loadedData.hosts = get_filteredHostsByGroup(response.data.result, selected);
+					loadedData.counters = get_deviceCounters(loadedData.hosts);
+				})
+				.catch((error) => {
+					console.log('error:', error);
+				});
 		}
 	}
 	//#endregion
 </script>
+
 <svelte:head>
 	<meta name="description" content="Trison Zabbix" />
 </svelte:head>
@@ -93,12 +99,17 @@
 	</div>
 	<div id="hosts">
 		{#each loadedData.hosts as host}
-			<div class="host" on:click={() => on__hostCardClicked(host)} on:keydown={() => on__hostCardClicked(host)}>
+			<div
+				class="host"
+				on:click={() => on__hostCardClicked(host)}
+				on:keydown={() => on__hostCardClicked(host)}
+			>
 				<HostCard zabbixHost={host} />
 			</div>
 		{/each}
 	</div>
 </section>
+
 <style lang="css" scoped>
 	#head-data {
 		display: flex;

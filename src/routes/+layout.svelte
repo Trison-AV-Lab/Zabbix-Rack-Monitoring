@@ -18,7 +18,7 @@
 	}
 	#header,
 	#footer {
-		position:-webkit-sticky;
+		position: -webkit-sticky;
 		position: sticky;
 	}
 	#header {
