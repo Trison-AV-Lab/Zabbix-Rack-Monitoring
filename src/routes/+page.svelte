@@ -26,19 +26,18 @@
 	//#endregion
 	ZabbixApiPost.login()
 		.then((response) => {
+			console.log(response);
 			authToken = response.data.result; //Use this on production environment
-			console.log('authToken:', authToken);
-			console.log('Getting hosts and groups...');
 			ZabbixApiPost.getHosts(authToken)
 				.then((response) => {
-					console.log('hosts loaded!');
+					console.log('hosts loaded!', response.data.result);
 					loadedData.hosts = response.data.result;
 					loadedData.counters = get_deviceCounters(response.data.result);
 				})
 				.catch(catch_error);
 			ZabbixApiPost.getHostGroups(authToken)
 				.then((response) => {
-					console.log('groups loaded!');
+					console.log('groups loaded!', response.data.result);
 					loadedData.groups = response.data.result;
 				})
 				.catch(catch_error);

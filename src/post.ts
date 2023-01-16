@@ -3,9 +3,16 @@ import type { PostMethods, PostResponse } from './types';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const _PRO_API_url = 'http://20.229.182.95:9080//api_jsonrpc.php';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const PRO_API_url = 'http://127.0.0.1/zabbix/api_jsonrpc.php';
+const PRO_API_url = 'http://10.100.99.151/zabbix/api_jsonrpc.php';
+
+const AllowOriginHeader = {
+	'Access-Control-Allow-Origin': '*',
+	'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+	'Access-Control-Allow-Headers': 'Content-Type, Authorization, Content-Length, X-Requested-With'
+};
 
 function login(): PostResponse {
+
 	const response = axios.post(PRO_API_url, {
 		jsonrpc: '2.0',
 		method: 'user.login',
@@ -14,9 +21,9 @@ function login(): PostResponse {
 			password: 'zabbix'
 		},
 		id: 1,
-		auth: null
+		auth: null,
+		headers: AllowOriginHeader
 	});
-	console.log("Login response: ", response);
 	return response;
 }
 
@@ -33,7 +40,6 @@ function getHosts(token: string): PostResponse {
 		auth: token,
 		id: 1
 	});
-	console.log("Hosts response: ", response);
 	return response;
 }
 
@@ -47,7 +53,6 @@ function getHostGroups(token: string): PostResponse {
 		auth: token,
 		id: 1
 	});
-	console.log("HostGroups response: ", response);
 	return response;
 }
 
