@@ -132,6 +132,7 @@
 		align-items: center;
 		padding: 1rem;
 		margin-top: 2rem;
+		margin-bottom: 1rem;
 	}
 	#select-filter-hostgroup {
 		display: flex;
@@ -181,7 +182,8 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
-		padding: 0 2rem;
+		margin-left: 0rem;
+		margin-right: 2rem;
 	}
 	.host {
 		width: 30%;
@@ -198,4 +200,14 @@
 		justify-content: center;
 		align-items: center;
 	}
+	@media /* if mobile, then hosts only 1 column */ (max-width: 600px) {
+		#hosts {
+			justify-content: center;
+		}
+		.host {
+			width: 100%;
+		}
+	}
+
+	
 </style>

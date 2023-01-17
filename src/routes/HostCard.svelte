@@ -64,7 +64,9 @@
 <style lang="css" scoped>
 	#host-card {
 		width: 28vw;
+		min-width: 250px;
 		height: 12vh;
+		min-height: 70px;
 		background: var(--color-bg-2);
 		border-radius: 10px;
 		box-shadow: 0px 0px 6px var(--shadow-color);
