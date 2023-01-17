@@ -1,14 +1,17 @@
 <script lang="ts" context="module">
 	import { page } from '$app/stores';
-	import logo from '$lib/images/Zabbix.png';
-	import customer from '$lib/images/RR.svg';
+	import trison from '$lib/images/trison.png';
+	import customer from '$lib/images/Porsche.svg';
+	import zabbix from '$lib/images/zabbix.svg';
 </script>
-
+<div id="zabbix-icon">
+	<img src={zabbix} alt="zabbix-icon">
+</div>
 <header id="header">
 	<div class="space" />
 	<div class="corner">
 		<a href="http://localhost/zabbix">
-			<img src={logo} alt="Zabbix-Logo" />
+			<img src={trison} alt="Trison-Logo" />
 		</a>
 	</div>
 	<nav id="nav-links">
@@ -36,6 +39,14 @@
 </header>
 
 <style lang="css" scoped>
+	#zabbix-icon {
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+	#zabbix-icon img {
+		height: 3vh;
+	}
 	#header {
 		display: flex;
 		justify-content: space-between;
@@ -47,6 +58,7 @@
 	}
 	.corner {
 		height: 20vh;
+		width: 20vh;
 	}
 	.corner img {
 		width: 100%;
