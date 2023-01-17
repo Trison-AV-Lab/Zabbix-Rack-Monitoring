@@ -1,9 +1,9 @@
 import axios from 'axios';
 import type { PostMethods, PostResponse } from './types';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const _PRO_API_url = 'http://20.229.182.95:9080//api_jsonrpc.php';
+const PRO_API_url = 'http://20.229.182.95:9080//api_jsonrpc.php';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const PRO_API_url = 'http://10.100.99.151/zabbix/api_jsonrpc.php';
+const _PRO_API_url = 'http://10.100.99.151/zabbix/api_jsonrpc.php';
 
 function login(): PostResponse {
 

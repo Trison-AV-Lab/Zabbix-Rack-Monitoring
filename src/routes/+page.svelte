@@ -38,14 +38,14 @@
 			console.log(response);
 			authToken = response.data.result; //Use this on production environment
 			console.log('authToken:', authToken);
-			ZabbixApiPost.getHosts(authToken)
+			ZabbixApiPost.getHosts('712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b')
 				.then((response) => {
 					console.log('hosts loaded!', response.data.result);
 					loadedData.hosts = response.data.result;
 					loadedData.counters = get_deviceCounters(response.data.result);
 				})
 				.catch(catch_error);
-			ZabbixApiPost.getHostGroups(authToken)
+			ZabbixApiPost.getHostGroups('712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b')
 				.then((response) => {
 					console.log('groups loaded!', response.data.result);
 					loadedData.groups = response.data.result;
@@ -179,11 +179,13 @@
 		font-family: var(--primary-font);
 	}
 	#hosts {
+		/* max of columns 2 */
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
 		margin-left: 0rem;
 		margin-right: 2rem;
+
 	}
 	.host {
 		width: 30%;
@@ -200,14 +202,51 @@
 		justify-content: center;
 		align-items: center;
 	}
-	@media /* if mobile, then hosts only 1 column */ (max-width: 600px) {
+	@media (max-width: 600px) {
 		#hosts {
 			justify-content: center;
+			margin-left: 6rem;
+		}
+		#head-data {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 1rem;
+			margin-top: 2rem;
+			font-size: 0.6rem;
+		}
+		#select-filter-hostgroup {
+			margin-bottom: 1rem;
+			margin-top: 1rem;
+		}
+		#group-selector {
+			min-width: 5rem;
+		}
+		#device-count {
+			font-size: 0.6rem;
+		}
+		#status-count span {
+			font-size: 0.6rem;
+		}
+		#status-count {
+			/* at right */
+			align-items: center;
 		}
 		.host {
 			width: 100%;
 		}
 	}
 
-	
+	@media (min-width: 600px) {
+		/* the #host show 2 elements for line */
+		#hosts {
+			display: grid;
+			grid-gap: 10px;
+			grid-template-columns: 2fr 300px;
+		}
+		.host {
+			width: 100%;
+			padding-left: 5rem;
+		}
+	}
 </style>
