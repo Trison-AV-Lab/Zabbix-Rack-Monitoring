@@ -1,6 +1,6 @@
 {
 	"name": "zabbix-rack-monitoring",
-	"version": "1.0.0 PRODUCTION",
+	"version": "1.0.3 PRODUCTION",
 	"description": "Zabbix Rack Monitoring Frontend",
 	"scripts": {
 		"dev": "vite dev --host",
@@ -53,11 +53,23 @@
 	"contributors": [
 		{
 			"name": "Carlos Soto Pedreira",
-			"email": "carlos.soto@trisonworld.com"
+			"email": "carlos.soto@trisonworld.com",
+			"role": "Developer / UX Designer"
 		},
 		{
 			"name": "Fernando Ramón Franco Quintanilla",
-			"email": "fernando.franco@trisonworld.com"
+			"email": "fernando.franco@trisonworld.com",
+			"role": "Developer"
+		},
+		{
+			"name": "Fernando Pena López",
+			"email": "fernando.pena@trisonworld.com",
+			"role": "System Administrator"
+		},
+		{
+			"name": "Elena De la Cruz Sousa",
+			"email": "elena.sousa@trisonworld.com",
+			"role": "UX Designer / Designer"
 		}
 	]
 }
