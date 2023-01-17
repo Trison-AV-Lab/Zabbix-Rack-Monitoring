@@ -1,9 +1,9 @@
 {
 	"name": "zabbix-rack-monitoring",
-	"version": "1.0.0 PRE",
+	"version": "1.0.0 PRODUCTION",
 	"description": "Zabbix Rack Monitoring Frontend",
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "vite dev --host",
 		"build": "vite build",
 		"build-check": "vite build --mode=production",
 		"build-apache": "vite build --mode=production --strictPortals --base=/zabbix-rack-monitoring/ && cp -r ./dist/* /var/www/html/zabbix-rack-monitoring/",

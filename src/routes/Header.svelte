@@ -39,7 +39,7 @@
 	#header {
 		display: flex;
 		justify-content: space-between;
-		padding-bottom: 5vh;
+		margin-bottom: 5vh;
 	}
 	.space {
 		width: 1em;

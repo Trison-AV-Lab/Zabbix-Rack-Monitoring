@@ -29,6 +29,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		width: 90%;
+		padding: 0;
+		margin: 0;
 	}
 	#footer {
 		bottom: 0;

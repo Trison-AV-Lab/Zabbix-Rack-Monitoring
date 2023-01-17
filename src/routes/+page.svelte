@@ -11,6 +11,15 @@
 	import type { ZabbixHost, ApiLoadedData } from '../types';
 	//#endregion
 	//#region Variables
+	const uninterestedGroups = [
+		'Applications',
+		'Databases',
+		'Discovered hosts',
+		'Hypervisors',
+		'Linux servers',
+		'Virtual machines',
+		'Zabbix servers'
+	]
 	let currentHost: ZabbixHost;
 	let shallShowModal = false;
 	let loadedData: ApiLoadedData = {
@@ -26,15 +35,19 @@
 	//#endregion
 	ZabbixApiPost.login()
 		.then((response) => {
+			console.log(response);
 			authToken = response.data.result; //Use this on production environment
-			ZabbixApiPost.getHosts(authToken)
+			console.log('authToken:', authToken);
+			ZabbixApiPost.getHosts('712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b')
 				.then((response) => {
+					console.log('hosts loaded!', response.data.result);
 					loadedData.hosts = response.data.result;
 					loadedData.counters = get_deviceCounters(response.data.result);
 				})
 				.catch(catch_error);
-			ZabbixApiPost.getHostGroups(authToken)
+			ZabbixApiPost.getHostGroups('712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b')
 				.then((response) => {
+					console.log('groups loaded!', response.data.result);
 					loadedData.groups = response.data.result;
 				})
 				.catch(catch_error);
@@ -88,7 +101,9 @@
 			<select id="group-selector" on:change={on__selectOptionChanged}>
 				<option value="all">All</option>
 				{#each loadedData.groups as group}
-					<option value={group.name}>{group.name}</option>
+					{#if !uninterestedGroups.includes(group.name)}
+						<option value={group.name}>{group.name}</option>
+					{/if}
 				{/each}
 			</select>
 		</div>
@@ -116,6 +131,8 @@
 		justify-content: space-between;
 		align-items: center;
 		padding: 1rem;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
 	}
 	#select-filter-hostgroup {
 		display: flex;
@@ -142,6 +159,7 @@
 		background-size: 1.5rem;
 		text-align: center;
 		text-align-last: center;
+		min-width: 10rem;
 	}
 	#device-count {
 		font-size: 1rem;
@@ -161,10 +179,13 @@
 		font-family: var(--primary-font);
 	}
 	#hosts {
+		/* max of columns 2 */
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
-		padding: 0 2rem;
+		margin-left: 0rem;
+		margin-right: 2rem;
+
 	}
 	.host {
 		width: 30%;
@@ -180,5 +201,52 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	@media (max-width: 600px) {
+		#hosts {
+			justify-content: center;
+			margin-left: 6rem;
+		}
+		#head-data {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			padding: 1rem;
+			margin-top: 2rem;
+			font-size: 0.6rem;
+		}
+		#select-filter-hostgroup {
+			margin-bottom: 1rem;
+			margin-top: 1rem;
+		}
+		#group-selector {
+			min-width: 5rem;
+		}
+		#device-count {
+			font-size: 0.6rem;
+		}
+		#status-count span {
+			font-size: 0.6rem;
+		}
+		#status-count {
+			/* at right */
+			align-items: center;
+		}
+		.host {
+			width: 100%;
+		}
+	}
+
+	@media (min-width: 600px) {
+		/* the #host show 2 elements for line */
+		#hosts {
+			display: grid;
+			grid-gap: 10px;
+			grid-template-columns: 2fr 300px;
+		}
+		.host {
+			width: 100%;
+			padding-left: 5rem;
+		}
 	}
 </style>
