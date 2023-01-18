@@ -21,10 +21,10 @@
 		</svg> -->
 		<ul id="nav-list">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Alert Dashboard</a>
+				<a href="/">Alerts</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/devices' ? 'page' : undefined}>
-				<a href="/devices">Rack Devices</a>
+				<a href="/devices">Devices</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/support' ? 'page' : undefined}>
 				<a href="/support">Support</a>
