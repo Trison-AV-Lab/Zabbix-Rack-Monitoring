@@ -15,10 +15,9 @@
 		</a>
 	</div>
 	<nav id="nav-links">
-		<!--
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg> -->
+		</svg>
 		<ul id="nav-list">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Alerts</a>
@@ -30,9 +29,9 @@
 				<a href="/support">Support</a>
 			</li>
 		</ul>
-		<!-- <svg viewBox="0 0 2 3" aria-hidden="true">
+		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg> -->
+		</svg>
 	</nav>
 	<div class="corner">
 		<a href="http://localhost/zabbix">
@@ -74,14 +73,15 @@
 		justify-content: center;
 		--background: var(--color-bg-2);
 	}
-	/*svg {
+	svg {
 		width: 1.3em;
 		height: 2em;
 		display: inline;
+		z-index: -1;
 	}
 	path {
-		fill: var(--background);
-	}*/
+		fill: var(--color-bg-2);
+	}
 	#nav-list {
 		position: relative;
 		padding: 0;
@@ -91,16 +91,16 @@
 		justify-content: center;
 		align-items: center;
 		list-style: none;
-		background: var(--primary-color);
+		background: var(--color-bg-2);
 		background-size: contain;
-		border-radius: 0 0 0.5em 0.5em;
+
 	}
 	#nav-list li {
 		position: relative;
 		height: 100%;
 	}
-	#nav-list li :nth-child(1) {
-		border-left: 1px dashed var(--color-bg-1);
+	#nav-list li :nth-child(2) {
+		border-left: 1px dashed var(--optional-color-5a);
 	}
 	#nav-list li[aria-current='page']::before {
 		--size: 6px;
@@ -112,14 +112,14 @@
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
 
-		border-top: var(--size) solid var(--color-bg-2);
+		border-top: var(--size) solid var(--optional-color-5a);
 	}
 	#nav-links a {
 		display: flex;
 		height: 100%;
 		align-items: center;
 		padding: 0 2vw;
-		color: var(--color-bg-2);
+		color: var(--optional-color-5a);
 		font-weight: 700;
 		font-size: 0.7rem;
 		text-transform: uppercase;
