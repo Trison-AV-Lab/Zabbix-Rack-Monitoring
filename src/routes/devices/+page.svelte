@@ -42,7 +42,7 @@
 				.then((response) => {
 					console.log('hosts loaded!', response.data.result);
 					loadedData.hosts = response.data.result;
-					loadedData.counters = get_deviceCounters(response.data.result);
+					loadedData.counters = get_deviceCounters(loadedData.hosts);
 				})
 				.catch(catch_error);
 			ZabbixApiPost.getHostGroups('712d00c487267e61984018e1528fa4b735819c9666a3d2cf3d628eee66a1185b')
@@ -82,6 +82,7 @@
 				});
 		}
 	}
+
 	//#endregion
 </script>
 
