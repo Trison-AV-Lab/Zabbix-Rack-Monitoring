@@ -9,6 +9,7 @@
 	//#endregion
 	//#region Type imports
 	import type { ZabbixHost, ApiLoadedData } from '../../types';
+	import PieChart from '../PieChart.svelte';
 	//#endregion
 	//#region Variables
 	const uninterestedGroups = [
@@ -108,10 +109,15 @@
 				{/each}
 			</select>
 		</div>
-		<div id="status-count">
+		{#if loadedData.counters.total == 0}
+			<div id="no-devices"> </div>
+		{:else}
+			<PieChart devices={loadedData.counters} />
+		{/if}
+		<!--<div id="status-count">
 			<span class="offline-bg">{loadedData.counters.unavailable}</span>
 			<span class="online-bg">{loadedData.counters.available}</span>
-		</div>
+		</div> -->
 	</div>
 	<div id="hosts">
 		{#each loadedData.hosts as host}
