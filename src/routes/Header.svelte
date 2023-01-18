@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
 	import { page } from '$app/stores';
 	import trison from '$lib/images/trison.png';
-	import customer from '$lib/images/Porsche.svg';
+	import customer from '$lib/images/RR.svg';
 	import zabbix from '$lib/images/zabbix.svg';
 </script>
 <div id="zabbix-icon">
@@ -15,20 +15,24 @@
 		</a>
 	</div>
 	<nav id="nav-links">
+		<!--
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L1,2 C1.5,3 1.5,3 2,3 L2,0 Z" />
-		</svg>
+		</svg> -->
 		<ul id="nav-list">
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
-				<a href="/">Dashboard</a>
+				<a href="/">Alert Dashboard</a>
+			</li>
+			<li aria-current={$page.url.pathname === '/devices' ? 'page' : undefined}>
+				<a href="/devices">Rack Devices</a>
 			</li>
 			<li aria-current={$page.url.pathname === '/support' ? 'page' : undefined}>
 				<a href="/support">Support</a>
 			</li>
 		</ul>
-		<svg viewBox="0 0 2 3" aria-hidden="true">
+		<!-- <svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
-		</svg>
+		</svg> -->
 	</nav>
 	<div class="corner">
 		<a href="http://localhost/zabbix">
@@ -70,14 +74,14 @@
 		justify-content: center;
 		--background: var(--color-bg-2);
 	}
-	svg {
+	/*svg {
 		width: 1.3em;
 		height: 2em;
 		display: inline;
 	}
 	path {
 		fill: var(--background);
-	}
+	}*/
 	#nav-list {
 		position: relative;
 		padding: 0;
@@ -87,12 +91,16 @@
 		justify-content: center;
 		align-items: center;
 		list-style: none;
-		background: var(--background);
+		background: var(--primary-color);
 		background-size: contain;
+		border-radius: 0 0 0.5em 0.5em;
 	}
 	#nav-list li {
 		position: relative;
 		height: 100%;
+	}
+	#nav-list li :nth-child(1) {
+		border-left: 1px dashed var(--color-bg-1);
 	}
 	#nav-list li[aria-current='page']::before {
 		--size: 6px;
@@ -104,19 +112,20 @@
 		left: calc(50% - var(--size));
 		border: var(--size) solid transparent;
 
-		border-top: var(--size) solid var(--optional-color-5);
+		border-top: var(--size) solid var(--color-bg-2);
 	}
 	#nav-links a {
 		display: flex;
 		height: 100%;
 		align-items: center;
 		padding: 0 2vw;
-		color: var(--optional-color-5a);
+		color: var(--color-bg-2);
 		font-weight: 700;
 		font-size: 0.7rem;
 		text-transform: uppercase;
-		letter-spacing: 0.2em;
+		letter-spacing: 0.1em;
 		text-decoration: none;
 		transition: color 0.2s linear;
+		font-family: var(--primary-font);
 	}
 </style>
